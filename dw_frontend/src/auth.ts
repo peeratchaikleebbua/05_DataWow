@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { loginUserSchema } from "./core/models/auth/entity/auth.entity";
 import { IAuthUser } from "./core/models/auth/use-cases/login-user.use-case";
 import { InputParseError } from "./core/errors/common";
 import { loginUserController } from "./interface-adapters/controllers/auth/login-user.controller";
+import { loginUserSchema } from "./core/models/auth/entity/auth.entity";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -18,10 +18,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
+          console.log('credentials',credentials)
+
           // Validate input using Zod
           const { data: parsedCredentials, error: inputParseError } =
             loginUserSchema.safeParse({
-              email: credentials?.username,
+              username: credentials?.username,
             });
           if (inputParseError) {
             throw new InputParseError("กรุณากรอกข้อมูลเข้าสู่ระบบให้ถูกต้อง", {

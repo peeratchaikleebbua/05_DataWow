@@ -26,6 +26,7 @@ export const useLoginViewModel = () => {
    */
 
   const method = useForm<LoginUser>({
+    mode: "onChange",
     resolver: zodResolver(loginUserSchema),
   });
 

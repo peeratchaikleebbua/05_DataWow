@@ -16,7 +16,7 @@ const LoginView = () => {
         <LoginTemplate
           renderLoginSection={<LoginForm />}
           renderLoginButton={
-            <LoadingSubmitButton label="Sing In" disabled={loading} />
+            <LoadingSubmitButton label="Sign In" disabled={loading} />
           }
         />
       </form>

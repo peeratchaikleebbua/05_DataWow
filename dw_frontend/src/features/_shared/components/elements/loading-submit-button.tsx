@@ -9,8 +9,8 @@ interface ILoadingSubmitButton {
 
 const LoadingSubmitButton = ({ label, disabled }: ILoadingSubmitButton) => {
   return (
-    <Button type="submit" disabled={disabled}>
-      <Loader2 className="animate-spin" />
+    <Button type="submit" className="w-full" disabled={disabled}>
+      {disabled && <Loader2 className="animate-spin" />}
       {disabled ? null : label}
     </Button>
   );

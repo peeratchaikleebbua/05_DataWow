@@ -27,8 +27,12 @@ const TextForm = ({
 }: ITextForm) => {
   const { control } = useFormContext();
   const {
+    field,
     fieldState: { error },
   } = useController({ name, control });
+
+  console.log('field', field.value)
+  console.log('error', error)
 
   return (
     <FormField
@@ -45,8 +49,6 @@ const TextForm = ({
               {...field}
             />
           </FormControl>
-          {error && <FormDescription>{error.message}</FormDescription>}
-
           <FormMessage />
         </FormItem>
       )}

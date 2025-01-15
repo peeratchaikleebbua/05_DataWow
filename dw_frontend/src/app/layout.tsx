@@ -3,14 +3,14 @@ import "./globals.css";
 import ClientSideToastContainer from "@/features/_shared/libs/toast-provider";
 import React from "react";
 import QueryProvider from "@/features/_shared/libs/query-provider";
-import { Kanit } from "next/font/google";
+import { Castoro } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 
-const kanit = Kanit({
-  style: "normal",
-  weight: "300",
+const castoro = Castoro({
+  weight: '400',
+  style: 'normal',
   display: "auto",
-  subsets: ["thai"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={kanit.className}>
+      <body className={castoro.className}>
         <SessionProvider>
           <QueryProvider>
             <ClientSideToastContainer />

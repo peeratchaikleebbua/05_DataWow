@@ -14,7 +14,9 @@ export const userSchema = z.object({
    * User Identification
    */
 
-  username: z.string().min(1, "กรุณากรอก username"),
+  username: z.string({
+    required_error: "กรุณากรอก username"
+  }).min(1, "กรุณากรอก username"),
 
   /**
    * User Information

@@ -6,7 +6,11 @@ interface ILoginForm {
 }
 
 const LoginForm = (props: ILoginForm) => {
-  return <AuthUsernameForm {...props} />;
+  return (
+    <div className="grid grid-cols-1 gap-4">
+      <AuthUsernameForm {...props} />
+    </div>
+  );
 };
 
 export default LoginForm;
