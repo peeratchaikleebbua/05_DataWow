@@ -1,7 +1,5 @@
 import { dateFormSchema, refIdSchema } from "@/core/common/type.common";
 import { z } from "zod";
-import { userSchema } from "../../user/entity/user.entity";
-import { postSchema } from "../../post/entity/post.entity";
 
 /**
  * Comment Entity
@@ -26,9 +24,5 @@ export const commentSchema = z.object({
   updatedAt: dateFormSchema(),
 });
 
-export const commentPopulatedSchema = commentSchema.extend({
-  author: userSchema.optional(),
-  post: postSchema.optional(),
-});
 
-export type Comment = z.infer<typeof commentPopulatedSchema>;
+export type Comment = z.infer<typeof commentSchema>;

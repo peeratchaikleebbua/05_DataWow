@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { auth } from "@/auth";
 
 export const metadata: Metadata = {
   title: "TGO CFO",
@@ -11,7 +10,7 @@ export default async function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth()
+  // const session = await auth()
   return (
     <section>
       {children}

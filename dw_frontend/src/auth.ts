@@ -2,8 +2,8 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { loginUserSchema } from "./core/models/auth/entity/auth.entity";
 import { IAuthUser } from "./core/models/auth/use-cases/login-user.use-case";
-import { loginUserController } from "./interface-adapters/Controllers/Auth/login-user.controller";
 import { InputParseError } from "./core/errors/common";
+import { loginUserController } from "./interface-adapters/controllers/auth/login-user.controller";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -32,6 +32,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const user = await loginUserController({
             username: parsedCredentials.username,
           });
+
+          console.log('user', user)
 
           if (!user) {
             throw new Error("User not found.");

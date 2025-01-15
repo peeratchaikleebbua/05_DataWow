@@ -1,5 +1,5 @@
-import { Button } from "@/features/_shared/components/elements/button";
+import LoginView from "@/features/auth/components/views/login-view";
 
 export default async function LoginPage() {
-  return <Button>test</Button>;
+  return <LoginView />;
 }

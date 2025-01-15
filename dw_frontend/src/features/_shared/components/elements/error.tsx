@@ -6,7 +6,7 @@ interface IErrorElement {
   handleReset(): void;
 }
 
-const ErrorElement = ({ error, handleReset }: IErrorElement) => {
+const ErrorElement = ({  }: IErrorElement) => {
   return (
     <CenterDivContainer>
       <></>
