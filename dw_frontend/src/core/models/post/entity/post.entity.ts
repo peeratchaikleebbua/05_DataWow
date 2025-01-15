@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { userSchema } from "../user/user.entity";
+import { userSchema } from "../../user/entity/user.entity";
 import { dateFormSchema, refIdSchema } from "@/core/common/type.common";
 
 /**

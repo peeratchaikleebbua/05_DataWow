@@ -1,7 +1,7 @@
 import { dateFormSchema, refIdSchema } from "@/core/common/type.common";
 import { z } from "zod";
-import { userSchema } from "../user/user.entity";
-import { postSchema } from "../post/post.entity";
+import { userSchema } from "../../user/entity/user.entity";
+import { postSchema } from "../../post/entity/post.entity";
 
 /**
  * Comment Entity
