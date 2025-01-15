@@ -5,7 +5,7 @@ import {
 } from "@/core/common/repository.common";
 import { Post } from "@/core/models/post/entity/post.entity";
 import { IPostRepository } from "@/core/models/post/entity/post.repository";
-import { ICreatePosts } from "@/core/models/post/use-cases/create-posts.use-case";
+import { ICreatePost } from "@/core/models/post/use-cases/create-post.use-case";
 import { IDeletePost } from "@/core/models/post/use-cases/delete-post.use-case";
 import { IGetPostById } from "@/core/models/post/use-cases/get-post-by-id.use-case";
 import { IUpdatePost } from "@/core/models/post/use-cases/update-post.use-case";
@@ -20,8 +20,8 @@ import {
 export class RemotePostRepository implements IPostRepository {
   private postUrl = "/posts";
 
-  async createPosts(
-    request: RepositoryRequest<ICreatePosts>
+  async createPost(
+    request: RepositoryRequest<ICreatePost>
   ): Promise<RepositoryResponse<Post>> {
     const response = await postResource<AxiosApiResponse<Post>>(
       `${this.postUrl}`,
@@ -86,3 +86,5 @@ export class RemotePostRepository implements IPostRepository {
     };
   }
 }
+
+export const postRepository = new RemotePostRepository();

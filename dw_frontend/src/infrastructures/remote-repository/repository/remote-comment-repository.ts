@@ -46,3 +46,5 @@ export class RemoteCommentRepository implements ICommentRepository {
     };
   }
 }
+
+export const commentRepository = new RemoteCommentRepository();

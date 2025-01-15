@@ -1,12 +1,13 @@
 import { RepositoryResponse } from "@/core/common/repository.common";
 import { UnauthenticatedError } from "@/core/errors/auth";
 import { InputParseError } from "@/core/errors/common";
+import { Post } from "@/core/models/post/entity/post.entity";
 import {
-  GetCommentsByPostIdSchema,
-  GetCommentsByPostIdUseCase,
-  IGetCommentsByPostId,
-} from "@/core/models/comment/use-cases/get-comments-by-post-id.use-case";
-import { commentRepository } from "@/infrastructures/remote-repository/repository/remote-comment-repository";
+  createPostSchema,
+  CreatePostUseCase,
+  ICreatePost,
+} from "@/core/models/post/use-cases/create-post.use-case";
+import { postRepository } from "@/infrastructures/remote-repository/repository/remote-post-repository";
 import { AxiosRequestConfig } from "axios";
 
 /**
@@ -18,34 +19,32 @@ import { AxiosRequestConfig } from "axios";
  * 5. return presenter if have
  */
 
-export const getCommentsByPostIdController = async (
+export const createPostController = async (
   sessionId: string | undefined,
-  getCommentsByPostId: IGetCommentsByPostId,
+  createPost: ICreatePost,
   config?: AxiosRequestConfig
-): Promise<RepositoryResponse<Comment[]>> => {
+): Promise<RepositoryResponse<Post>> => {
   // check authentication
   if (!sessionId) {
     throw new UnauthenticatedError("กรุณาเข้าสู่ระบบ");
   }
 
-  const getCommentsByPostIdUseCase = new GetCommentsByPostIdUseCase(
-    commentRepository
-  );
+  const createPostUseCase = new CreatePostUseCase(postRepository);
 
   // check input validation
   const { data, error: inputParseError } =
-    GetCommentsByPostIdSchema.safeParse(getCommentsByPostId);
+    createPostSchema.safeParse(createPost);
   if (inputParseError) {
-    throw new InputParseError(`Invalid comment query Input`, {
+    throw new InputParseError(`Invalid Create Post Input`, {
       cause: inputParseError,
     });
   }
 
   // invoke usecase
-  const comments = await getCommentsByPostIdUseCase.execute({
+  const newPost = await createPostUseCase.execute({
     payload: data,
     config,
   });
 
-  return comments;
+  return newPost;
 };

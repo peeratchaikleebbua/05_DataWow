@@ -8,27 +8,27 @@ import { IPostRepository } from "../entity/post.repository";
 import { Post, postSchema } from "../entity/post.entity";
 
 /**
- * CreatePosts Schema
+ * CreatePost Schema
  */
 
-export const createPostsSchema = postSchema.pick({
+export const createPostSchema = postSchema.pick({
   title: true,
   content: true,
   category: true,
 });
 
-export type ICreatePosts = z.infer<typeof createPostsSchema>;
+export type ICreatePost = z.infer<typeof createPostSchema>;
 
 /**
  * CreatePosts UseCase
  */
 
-export class CreatePostsUseCase {
+export class CreatePostUseCase {
   constructor(private postRepository: IPostRepository) {}
 
   async execute(
-    request: RepositoryRequest<ICreatePosts>
+    request: RepositoryRequest<ICreatePost>
   ): Promise<RepositoryResponse<Post>> {
-    return await this.postRepository.createPosts(request);
+    return await this.postRepository.createPost(request);
   }
 }
