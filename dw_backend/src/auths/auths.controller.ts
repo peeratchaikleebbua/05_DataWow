@@ -12,7 +12,7 @@ export class AuthsController {
   constructor(private readonly authsService: AuthsService) {}
 
   @Public()
-  @Post()
+  @Post('login')
   async login(@Body() loginDto: LoginDto) {
     return this.authsService.login(loginDto);
   }
