@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { postQueryKeys } from "@/core/models/post/entity/post.query-key";
+import PostListView from "@/features/post/components/views/post-list-view";
 import { getPostsController } from "@/interface-adapters/controllers/post/get-posts.controller";
 import {
   dehydrate,
@@ -23,7 +24,7 @@ export default async function PostsPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <></>
+      <PostListView />
     </HydrationBoundary>
   );
 }
