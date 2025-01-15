@@ -1,26 +1,44 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class CommentsService {
-  create(createCommentDto: CreateCommentDto) {
-    return 'This action adds a new comment';
+  constructor(private readonly database: DatabaseService) {}
+  async create(createCommentDto: CreateCommentDto, authorId: number) {
+    const { content, postId } = createCommentDto;
+
+    const newComment = await this.database.comment.create({
+      data: {
+        content,
+        postId,
+        authorId,
+      },
+    });
+
+    if (!newComment) {
+      throw new BadRequestException('สร้าง comment ไม่สำเร็จ');
+    }
+
+    return newComment;
   }
 
-  findAll() {
-    return `This action returns all comments`;
-  }
+  async findAll(postId: number) {
+    const comments = await this.database.comment.findMany({
+      where: {
+        postId,
+      },
+    });
 
-  findOne(id: number) {
-    return `This action returns a #${id} comment`;
-  }
+    if (!comments) {
+      throw new NotFoundException('ไม่พบ comments ใต้ postId');
+    }
 
-  update(id: number, updateCommentDto: UpdateCommentDto) {
-    return `This action updates a #${id} comment`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} comment`;
+    return comments;
   }
 }

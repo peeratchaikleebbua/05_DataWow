@@ -11,6 +11,8 @@ export const UserMe = createParamDecorator(
     if (!request.user) {
       throw new UnauthorizedException('User not found in request');
     }
+
+    request.user.userId = Number(request.user.userId)
     return request.user as AuthUser;
   },
 );

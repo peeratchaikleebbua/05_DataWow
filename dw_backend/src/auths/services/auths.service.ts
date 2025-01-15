@@ -26,7 +26,7 @@ export class AuthsService {
 
     // generate accessToken
     const accessToken = await this.jwtService.generateAuthToken({
-      userId: user.id.toString(),
+      userId: user.id,
       username,
     });
 

@@ -1,26 +1,79 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class PostsService {
-  create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+  constructor(private readonly database: DatabaseService) {}
+
+  async create(createPostDto: CreatePostDto, authorId: number) {
+    const { title, content, category } = createPostDto;
+
+    const newPost = await this.database.post.create({
+      data: {
+        title,
+        content,
+        category,
+        authorId,
+      },
+    });
+
+    if (!newPost) {
+      throw new BadRequestException('สร้าง post ไม่สำเร็จ');
+    }
+
+    return newPost;
   }
 
-  findAll() {
-    return `This action returns all posts`;
+  async findAll() {
+    return await this.database.post.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async findOne(id: number) {
+    const post = await this.database.post.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!post) {
+      throw new NotFoundException('ไม่พบ post');
+    }
+
+    return post;
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  async update(id: number, updatePostDto: UpdatePostDto) {
+    const post = await this.database.post.update({
+      where: {
+        id,
+      },
+      data: updatePostDto,
+    });
+
+    if (!post) {
+      throw new NotFoundException('แก้ไข post ไม่สำเร็จ');
+    }
+
+    return post;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: number) {
+    const removedPost = await this.database.post.delete({
+      where: {
+        id,
+      },
+    });
+
+    if (!removedPost) {
+      throw new NotFoundException('ลบpost ไม่สำเร็จ');
+    }
+
+    return removedPost;
   }
 }

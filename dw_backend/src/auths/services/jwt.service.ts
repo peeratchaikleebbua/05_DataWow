@@ -12,14 +12,14 @@ export class AuthJwtService {
   ) {}
 
   private async generateToken(
-    userId: string,
+    userId: number,
     secret: string,
     expiresIn: string,
     paylod: Record<string, any> = {},
   ) {
     return await this.jwtService.signAsync(paylod, {
       jwtid: uuidv4(),
-      subject: userId,
+      subject: userId.toString(),
       expiresIn,
       secret,
     });

@@ -6,7 +6,7 @@ export type JwtPayload = {
 };
 
 export type AuthUser = {
-  userId: string;
+  userId: number;
   username: string;
 };
 

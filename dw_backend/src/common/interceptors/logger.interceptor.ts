@@ -36,11 +36,11 @@ export class LoggerInterceptor implements NestInterceptor {
           );
         },
         (err) => {
-          const message = err.response.message
-          const statusCode = err.response.statusCode;
-          const error = err.response.error;
+          const message = err.response?.message
+          const statusCode = err.response?.statusCode;
+          const error = err.response?.error;
           const responseTime = `${Date.now() - now}ms`;
-          if (err.response) {
+          if (message && error) {
             this.logger.error(
               `Outgoing Response: ${method} ${url} - err: ${error} - message: ${message} - Status: ${statusCode} - Time: ${responseTime}`,
             );
