@@ -29,9 +29,6 @@ export class AuthJwtService {
     const jwtSecret = this.configService.get<string>('auth.jwtSecret');
     const expiresIn = this.configService.get<string>('auth.expiresIn');
 
-    console.log('ex', expiresIn);
-    console.log('ex test', typeof expiresIn);
-
     const accessToken = await this.generateToken(
       authPayload.userId,
       jwtSecret,

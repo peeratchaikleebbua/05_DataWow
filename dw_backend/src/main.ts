@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { LoggerInterceptor } from './common/interceptors/logger.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,9 +23,14 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, documentFactory);
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({transform: true}));
   await app.listen(process.env.PORT ?? 3000, () => {
-    console.info(`DataWow Server is running on port ${process.env.PORT}`)
+    console.info(`DataWow Server is running on port ${process.env.PORT}`);
   });
+
+  // Retrieve the LoggingInterceptor from the DI container
+  const loggingInterceptor = app.get(LoggerInterceptor);
+
+  app.useGlobalInterceptors(loggingInterceptor);
 }
 bootstrap();
