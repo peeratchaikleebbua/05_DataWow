@@ -1,0 +1,35 @@
+import { dateFormSchema, refIdSchema } from "@/core/common/type.common";
+import { z } from "zod";
+import { postSchema } from "../post/post.entity";
+import { commentSchema } from "../comment/comment.entity";
+
+/**
+ * User Entity
+ */
+
+export const userSchema = z.object({
+  id: refIdSchema,
+
+  /**
+   * User Identification
+   */
+
+  username: z.string().min(1, "กรุณากรอก username"),
+
+  /**
+   * User Information
+   */
+
+  post: z.array(postSchema).optional(),
+  comment: z.array(commentSchema).optional(),
+
+
+  /**
+   * User Date
+   */
+
+  createdAt: dateFormSchema(),
+  updatedAt: dateFormSchema(),
+});
+
+export type User = z.infer<typeof userSchema>;
