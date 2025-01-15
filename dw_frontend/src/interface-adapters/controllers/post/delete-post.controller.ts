@@ -19,7 +19,7 @@ import { AxiosRequestConfig } from "axios";
  */
 
 export const deletePostController = async (
-  sessionId: string | undefined,
+  sessionId: number | undefined,
   deletePost: IDeletePost,
   config?: AxiosRequestConfig
 ): Promise<RepositoryResponse<IMessage>> => {
@@ -34,7 +34,7 @@ export const deletePostController = async (
   const { data, error: inputParseError } =
     deletePostSchema.safeParse(deletePost);
   if (inputParseError) {
-    throw new InputParseError(`Invalid Create Post Input`, {
+    throw new InputParseError(`Invalid delete Post Input`, {
       cause: inputParseError,
     });
   }

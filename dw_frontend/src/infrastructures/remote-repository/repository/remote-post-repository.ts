@@ -16,6 +16,7 @@ import {
   patchResource,
   postResource,
 } from "../config/api-client";
+import { AxiosRequestConfig } from "axios";
 
 export class RemotePostRepository implements IPostRepository {
   private postUrl = "/posts";
@@ -34,10 +35,10 @@ export class RemotePostRepository implements IPostRepository {
     };
   }
 
-  async getPosts(request: RepositoryRequest<void>): Promise<RepositoryResponse<Post[]>> {
+  async getPosts(config?: AxiosRequestConfig): Promise<RepositoryResponse<Post[]>> {
     const response = await getResource<AxiosApiResponse<Post[]>>(
       `${this.postUrl}`,
-      request.config
+      config
     );
     return {
       data: response.data,

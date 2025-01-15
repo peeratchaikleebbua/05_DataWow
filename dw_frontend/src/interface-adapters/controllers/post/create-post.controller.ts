@@ -20,7 +20,7 @@ import { AxiosRequestConfig } from "axios";
  */
 
 export const createPostController = async (
-  sessionId: string | undefined,
+  sessionId: number | undefined,
   createPost: ICreatePost,
   config?: AxiosRequestConfig
 ): Promise<RepositoryResponse<Post>> => {

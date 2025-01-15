@@ -19,7 +19,7 @@ import { AxiosRequestConfig } from "axios";
  */
 
 export const createCommentController = async (
-  sessionId: string | undefined,
+  sessionId: number | undefined,
   createComment: ICreateComment,
   config?: AxiosRequestConfig
 ): Promise<RepositoryResponse<Comment>> => {

@@ -19,7 +19,7 @@ import { AxiosRequestConfig } from "axios";
  */
 
 export const getCommentsByPostIdController = async (
-  sessionId: string | undefined,
+  sessionId: number | undefined,
   getCommentsByPostId: IGetCommentsByPostId,
   config?: AxiosRequestConfig
 ): Promise<RepositoryResponse<Comment[]>> => {

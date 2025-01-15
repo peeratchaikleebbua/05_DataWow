@@ -8,12 +8,13 @@ import { Post } from "./post.entity";
 import { IGetPostById } from "../use-cases/get-post-by-id.use-case";
 import { IUpdatePost } from "../use-cases/update-post.use-case";
 import { IDeletePost } from "../use-cases/delete-post.use-case";
+import { AxiosRequestConfig } from "axios";
 
 export type IPostRepository = {
   createPost(
     request: RepositoryRequest<ICreatePost>
   ): Promise<RepositoryResponse<Post>>;
-  getPosts(request: RepositoryRequest<void>): Promise<RepositoryResponse<Post[]>>;
+  getPosts(config?: AxiosRequestConfig): Promise<RepositoryResponse<Post[]>>;
   getPostById(
     request: RepositoryRequest<IGetPostById>
   ): Promise<RepositoryResponse<Post>>;
