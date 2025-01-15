@@ -31,7 +31,11 @@ export class PostsService {
   }
 
   async findAll() {
-    return await this.database.post.findMany();
+    return await this.database.post.findMany({
+      orderBy: {
+        createdAt: "desc"
+      }
+    });
   }
 
   async findOne(id: number) {
@@ -49,31 +53,41 @@ export class PostsService {
   }
 
   async update(id: number, updatePostDto: UpdatePostDto) {
-    const post = await this.database.post.update({
+    const findPost = await this.database.post.findUnique({
+      where: { id },
+    });
+
+    if (!findPost) {
+      throw new NotFoundException('Post not found. แก้ไข post ไม่สำเร็จ');
+    }
+
+    const updatedPost = await this.database.post.update({
       where: {
         id,
       },
       data: updatePostDto,
     });
 
-    if (!post) {
-      throw new NotFoundException('แก้ไข post ไม่สำเร็จ');
+    if (!updatedPost) {
+      throw new BadRequestException('แก้ไข post ไม่สำเร็จ');
     }
 
-    return post;
+    return updatedPost;
   }
 
   async remove(id: number) {
-    const removedPost = await this.database.post.delete({
-      where: {
-        id,
-      },
+    const removedPost = await this.database.post.findUnique({
+      where: { id },
     });
 
     if (!removedPost) {
-      throw new NotFoundException('ลบpost ไม่สำเร็จ');
+      throw new NotFoundException('Post not found. ลบ post ไม่สำเร็จ');
     }
 
-    return removedPost;
+    await this.database.post.delete({
+      where: { id },
+    });
+
+    return { message: 'ลบ post สำเร็จ' };
   }
 }

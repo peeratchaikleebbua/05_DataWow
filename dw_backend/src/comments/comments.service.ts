@@ -13,6 +13,16 @@ export class CommentsService {
   async create(createCommentDto: CreateCommentDto, authorId: number) {
     const { content, postId } = createCommentDto;
 
+    const findPost = await this.database.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+
+    if (!findPost) {
+      throw new NotFoundException('ไม่พบ post, สร้าง comment ไม่สำเร็จ');
+    }
+
     const newComment = await this.database.comment.create({
       data: {
         content,
@@ -33,6 +43,9 @@ export class CommentsService {
       where: {
         postId,
       },
+      orderBy: {
+        createdAt: 'desc'
+      }
     });
 
     if (!comments) {
