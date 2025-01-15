@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import {
+  RepositoryRequest,
   RepositoryResponse,
 } from "@/core/common/repository.common";
 import { IPostRepository } from "../entity/post.repository";
@@ -25,7 +26,7 @@ export type IGetPosts = z.infer<typeof getPostsSchema>;
 export class GetPostsUseCase {
   constructor(private postRepository: IPostRepository) {}
 
-  async execute(): Promise<RepositoryResponse<Post[]>> {
-    return await this.postRepository.getPosts();
+  async execute(request: RepositoryRequest<void>): Promise<RepositoryResponse<Post[]>> {
+    return await this.postRepository.getPosts(request);
   }
 }

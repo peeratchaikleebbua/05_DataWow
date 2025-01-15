@@ -13,7 +13,7 @@ export type IPostRepository = {
   createPosts(
     request: RepositoryRequest<ICreatePosts>
   ): Promise<RepositoryResponse<Post>>;
-  getPosts(): Promise<RepositoryResponse<Post[]>>;
+  getPosts(request: RepositoryRequest<void>): Promise<RepositoryResponse<Post[]>>;
   getPostById(
     request: RepositoryRequest<IGetPostById>
   ): Promise<RepositoryResponse<Post>>;
