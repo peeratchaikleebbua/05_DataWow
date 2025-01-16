@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <a href="https://www.linkedin.com/in/peeratchai-kleebbua/">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://media.licdn.com/dms/image/v2/C5603AQER-pOTPo7xkQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1637471096087?e=1738195200&v=beta&t=-yYgkdMRHV_R6hJ0yYJEhykfQ3VDXf5GCLcoQRUIH5Q">
+      <img alt="Peeratcha Kleebbua Picture" src="https://media.licdn.com/dms/image/v2/C5603AQER-pOTPo7xkQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1637471096087?e=1738195200&v=beta&t=-yYgkdMRHV_R6hJ0yYJEhykfQ3VDXf5GCLcoQRUIH5Q" height="128">
+    </picture>
+  </a>
+  <a href="https://nextjs.org">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_dark_background.png">
+      <img alt="Next.js logo" src="https://assets.vercel.com/image/upload/v1662130559/nextjs/Icon_light_background.png" height="128">
+    </picture>
+  </a>
+  <h1>DataWow Project By Peeratchai Kleebbua</h1>
 
-## Getting Started
+<a href="https://www.linkedin.com/in/peeratchai-kleebbua/"><img alt="🔗 My Profile" src="https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
 
-First, run the development server:
+</div>
+
+## Project Instruction
 
 ```bash
+# install dependency
+npm install
+# start dev
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in any browser to see the web.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- This project for DataWow utilize Clean architecture to outline the project
 
-## Learn More
+  ![Logo](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
 
-To learn more about Next.js, take a look at the following resources:
+  ![Logo](https://storage.googleapis.com/bitloops-github-assets/Documentation%20Images/clean-architecture-and-ddd.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- For Client Component Management, I use MVVM-C and Group by feature
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  ![Logo](https://raya.engineering/wp-content/uploads/2022/02/Bildschirmfoto-2021-01-07-um-16.25.53-1024x501-1.png)
 
-## Deploy on Vercel
+### Top-level Project Structure layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    .
+    ├── app                                 # App Router for DataWow
+    ├   ├── patient                             # Patient Route
+    ├   ├── staff                               # Staff View Route
+    ├── core                                # Entity and UseCase Layer (Entity & Business Logic)
+    ├   ├── entities                            # Entity and UseCase
+    ├       ├── PatientForm                         # PatientForm Entity
+    ├           ├── entity                              # PatientForm Entity and Repository
+    ├       ├── User                                # User Entity
+    ├           ├── entity                              # User Entity and Repository
+    ├── features                            # Feature folder
+    ├   ├── patientForm                         # PatientForm Feature
+    ├       ├── components                          # Reusable Components for PatientForm Feature
+    ├       ├── hooks                               # Reusable Hooks for PatientForm Feature
+    ├           ├── coordinators                        # Reusable Coordinator Hooks for Patient Feature
+    ├           ├── viewModel                           # Reusable ViewModel Hooks for Patient Feature
+    ├── infrastructures                     # Infrastructure Layer
+    ├   ├── socket-io                           # Socket.IO infrastructure
+    ├       ├── config                          # Config folder for Socket.IO
+    └── shared                              # Global Reusable
+        ├── components                          # Global Reusable component
+        ├── hooks                               # Global Reusable hooks
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Note: This Project is small, so I do not have interface-adaptor layer
+
+> Note: If Project is tended to be larger, I will use Atomic Design Pattern to help organizing Component in Feature
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`NEXT_PUBLIC_API_URL`
+
+## Authors
+
+- [@peeratchaikleebbua](https://github.com/peeratchaikleebbua)
