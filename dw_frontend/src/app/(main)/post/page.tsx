@@ -10,9 +10,6 @@ import {
 import React from "react";
 
 export default async function PostsPage() {
-  // params => id
-  // searchParams => ?edit, ?draft, ?revalidate
-
   const session = await auth();
   const sessionId = session?.account.id;
   const queryClient = new QueryClient();

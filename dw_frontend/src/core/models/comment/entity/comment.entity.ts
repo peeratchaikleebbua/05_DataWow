@@ -14,7 +14,7 @@ export const commentSchema = z.object({
    * Comment Date
    */
 
-  content: z.string(),
+  content: z.string().min(1, "กรุณาเขียน comment"),
   authorId: refIdSchema,
   postId: refIdSchema,
 

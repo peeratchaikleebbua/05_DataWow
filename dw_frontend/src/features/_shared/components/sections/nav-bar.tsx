@@ -42,7 +42,7 @@ const NavBar = ({
           <SideBar userId={userId} />
         </div>
 
-        <div className="md:col-span-2 w-full">{children}</div>
+        <div className="md:col-span-3 w-full">{children}</div>
       </div>
     </div>
   );

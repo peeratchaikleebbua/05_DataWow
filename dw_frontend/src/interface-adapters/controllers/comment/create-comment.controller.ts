@@ -1,6 +1,7 @@
 import { RepositoryResponse } from "@/core/common/repository.common";
 import { UnauthenticatedError } from "@/core/errors/auth";
 import { InputParseError } from "@/core/errors/common";
+import { Comment } from "@/core/models/comment/entity/comment.entity";
 import {
   createCommentSchema,
   CreateCommentUseCase,

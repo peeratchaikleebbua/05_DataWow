@@ -10,6 +10,7 @@ import {
   postResource,
 } from "../config/api-client";
 import { IGetCommentsByPostId } from "@/core/models/comment/use-cases/get-comments-by-post-id.use-case";
+import { Comment } from "@/core/models/comment/entity/comment.entity";
 
 export class RemoteCommentRepository implements ICommentRepository {
   private commentUrl = "/comments";

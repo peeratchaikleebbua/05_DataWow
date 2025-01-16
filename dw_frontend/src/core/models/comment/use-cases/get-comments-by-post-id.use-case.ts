@@ -4,7 +4,7 @@ import {
   RepositoryRequest,
   RepositoryResponse,
 } from "@/core/common/repository.common";
-import { commentSchema } from "../entity/comment.entity";
+import { Comment, commentSchema } from "../entity/comment.entity";
 import { ICommentRepository } from "../entity/comment.repository";
 
 /**

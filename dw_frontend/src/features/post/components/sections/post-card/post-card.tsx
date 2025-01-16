@@ -12,19 +12,29 @@ import { FaComment } from "react-icons/fa6";
 import PostBadge from "../../elements/post-badge";
 import UserAvatar from "@/features/_shared/components/elements/user-avatar";
 import { Label } from "@/features/_shared/components/elements/label";
+import { useParams, useRouter } from "next/navigation";
+import { dateConversion } from "@/features/_shared/utils/date-conversion";
+import DateText from "@/features/_shared/components/fragments/date-text";
 
 interface IPostCard {
   post: Post;
   showActions?: boolean;
+  showDate?: boolean;
 }
 
-const PostCard = ({ post }: IPostCard) => {
+const PostCard = ({ post, showActions, showDate }: IPostCard) => {
+  const router = useRouter();
+  const params = useParams();
+  const postId = params.postId;
+  const isDetailPage = postId;
+
   return (
-    <Card className="w-full">
+    <Card className="w-full h-full">
       <CardHeader>
         <CardTitle className="flex flex-row gap-2 items-center">
           <UserAvatar />
           <Label>{post.author?.username}</Label>
+          {showDate && <DateText date={post.createdAt} />}
         </CardTitle>
         <CardDescription className="flex justify-start">
           <PostBadge postCategory={post.category} />
@@ -36,8 +46,13 @@ const PostCard = ({ post }: IPostCard) => {
       </CardContent>
       <CardFooter className="flex justify-start">
         <div className="flex flex-row gap-2 items-center">
-          <FaComment className="text-gray-200" />
-          <Label>{post.Comment?.length} Comments</Label>
+          <FaComment
+            className={`text-gray-200 ${isDetailPage ? "" : "cursor-pointer"}`}
+            onClick={() => !isDetailPage && router.push(`/post/${post.id}`)}
+          />
+          <Label className="text-xs font-light text-gray-400">
+            {post.Comment?.length} Comments
+          </Label>
         </div>
       </CardFooter>
     </Card>
