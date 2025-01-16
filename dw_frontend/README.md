@@ -40,8 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) in any browser to see the we
 
   ![Logo](https://raya.engineering/wp-content/uploads/2022/02/Bildschirmfoto-2021-01-07-um-16.25.53-1024x501-1.png)
 
-- For Component Design Pattern, I use Atomic Design Pattern
-  But I rename each layer name to be more generic
+- For Component Design Pattern, I use Atomic Design Pattern, but I rename each layer name to be more generic
   - Atoms     => Elements
   - Molecules => Fragments
   - Organisms => Sections
