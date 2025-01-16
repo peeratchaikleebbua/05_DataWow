@@ -36,9 +36,19 @@ Open [http://localhost:3000](http://localhost:3000) in any browser to see the we
 
   ![Logo](https://storage.googleapis.com/bitloops-github-assets/Documentation%20Images/clean-architecture-and-ddd.png)
 
-- For Client Component Management, I use MVVM-C and Group by feature
+- For Client Architecture, I use MVVM-C and Group by feature
 
   ![Logo](https://raya.engineering/wp-content/uploads/2022/02/Bildschirmfoto-2021-01-07-um-16.25.53-1024x501-1.png)
+
+- For Component Design Pattern, I use Atomic Design Pattern
+  But I rename each layer name to be more generic
+  - Atoms     => Elements
+  - Molecules => Fragments
+  - Organisms => Sections
+  - Templates => Templates
+  - Pages     => Views
+
+  ![Logo](https://miro.medium.com/v2/resize:fit:720/format:webp/1*PcQ-m317YX6ct9ccBi6H1Q.png)
 
 ### Top-level Project Structure layout
 

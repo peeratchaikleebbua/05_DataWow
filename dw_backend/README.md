@@ -13,7 +13,7 @@
 
 ## DataWow Backend
 
-This is project for DataWow Socket Backend
+This is project for DataWow NestJs Backend
 
 ## Installation
 
