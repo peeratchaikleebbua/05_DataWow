@@ -11,6 +11,7 @@ const PostCategorySelectForm = ({ disabled }: IPostCategorySelectForm) => {
     <SelectForm
       name="category"
       labelName="Category"
+      placeholder="Choose a community"
       options={PostBaseFormEntity.postCategoryOptions}
       required
       disabled={disabled}

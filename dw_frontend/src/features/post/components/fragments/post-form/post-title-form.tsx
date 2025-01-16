@@ -9,10 +9,9 @@ const PostTitleForm = ({ disabled }: IPostTitleForm) => {
   return (
     <TextForm
       name="title"
-      labelName="หัวข้อ"
       required
       disabled={disabled}
-      placeholder="ระบุหัวข้อ"
+      placeholder="Title"
     />
   );
 };

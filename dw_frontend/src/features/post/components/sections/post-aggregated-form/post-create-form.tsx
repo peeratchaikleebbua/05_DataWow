@@ -9,8 +9,10 @@ interface IPostCreateForm {
 
 const PostCreateForm = (props: IPostCreateForm) => {
   return (
-    <div>
-      <PostCategorySelectForm {...props} />
+    <div className="flex flex-col gap-3">
+      <div className="md:w-1/2">
+        <PostCategorySelectForm {...props} />
+      </div>
       <PostTitleForm {...props} />
       <PostContentForm {...props} />
     </div>

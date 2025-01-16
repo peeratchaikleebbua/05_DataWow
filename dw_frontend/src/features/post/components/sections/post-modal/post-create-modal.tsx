@@ -29,15 +29,11 @@ const PostCreateModal = ({
       onOpenChange={(isOpen) => !isOpen && closeModal()}
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-lg max-w-sm rounded-lg">
         <DialogHeader>
           <DialogTitle>Create Post</DialogTitle>
         </DialogHeader>
-
-        <div className="flex items-center w-full space-x-2">
-          <PostCreateForm />
-        </div>
-
+        <PostCreateForm />
         <DialogFooter className="sm:justify-start">
           <Button type="button" variant="secondary" onClick={closeModal}>
             Close

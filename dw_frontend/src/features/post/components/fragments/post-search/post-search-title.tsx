@@ -10,7 +10,7 @@ interface IPostSearchTitle {
 }
 
 const PostSearchTitle = ({ currentSearch, onSearch }: IPostSearchTitle) => {
-  return <Input value={currentSearch} onChange={(e) => onSearch(e.target.value)} />;
+  return <Input value={currentSearch} placeholder="Search" onChange={(e) => onSearch(e.target.value)} />;
 };
 
 export default PostSearchTitle;

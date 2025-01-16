@@ -32,7 +32,7 @@ const PostCategorySearch = ({
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectItem value="none"></SelectItem>
+          <SelectItem value="none"> </SelectItem>
           {PostBaseFormEntity.postCategoryOptions.map((option, index) => (
             <SelectItem key={index} value={option.value.toString()}>
               {option.label}

@@ -17,25 +17,28 @@ const PostAction = ({ search }: IPostAction) => {
   const { method, modal, onSubmit } = usePostCreateViewModel();
   return (
     <FormProvider {...method}>
-      <div className="grid grid-cols-5 gap-3">
-        <div className="col-span-3">
+      <div className="grid grid-cols-6 md:grid-cols-5 gap-3">
+        <div className="col-span-2 md:col-span-3">
           <PostSearchTitle
             currentSearch={search.query.searchQuery || ""}
             onSearch={search.setQuery.handleSearchPosts}
           />
         </div>
-        <PostCategorySearch
-          currentSelect={search.query.categoryQuery}
-          onSelect={search.setQuery.handleCategoryChange}
-        />
-
-        <PostCreateModal
-          onSubmit={onSubmit}
-          isOpenModal={modal.isModalOpen}
-          closeModal={modal.closeModal}
-        >
-          <Button onClick={modal.openModal}>Create +</Button>
-        </PostCreateModal>
+        <div className="col-span-2 md:col-span-1">
+          <PostCategorySearch
+            currentSelect={search.query.categoryQuery}
+            onSelect={search.setQuery.handleCategoryChange}
+          />
+        </div>
+        <div className="col-span-2 md:col-span-1">
+          <PostCreateModal
+            onSubmit={onSubmit}
+            isOpenModal={modal.isModalOpen}
+            closeModal={modal.closeModal}
+          >
+            <Button className="w-full" onClick={modal.openModal}>Create +</Button>
+          </PostCreateModal>
+        </div>
       </div>
     </FormProvider>
   );

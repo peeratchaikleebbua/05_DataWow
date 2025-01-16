@@ -9,8 +9,7 @@ const PostContentForm = ({ disabled }: IPostContentForm) => {
   return (
     <TextAreaForm
       name="content"
-      labelName="เนื้อหา"
-      placeholder="ระบุเนื้อหา"
+      placeholder="What's on your mind..."
       required
       disabled={disabled}
     />

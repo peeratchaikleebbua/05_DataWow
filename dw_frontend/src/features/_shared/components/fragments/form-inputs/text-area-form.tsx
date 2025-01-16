@@ -1,5 +1,5 @@
 import React from "react";
-import {  useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import {
   FormField,
   FormItem,
@@ -35,6 +35,7 @@ const TextAreaForm = ({
           <FormLabel>{labelName}</FormLabel>
           <FormControl>
             <Textarea
+              className="h-40"
               disabled={disabled}
               required={required}
               placeholder={placeholder}
