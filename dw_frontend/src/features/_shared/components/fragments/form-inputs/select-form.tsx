@@ -38,6 +38,10 @@ const SelectForm = ({
 }: ISelectForm) => {
   const { control } = useFormContext();
 
+  const optionType = typeof options[0].value;
+
+  const isStringValue = optionType === "string";
+
   return (
     <FormField
       control={control}
@@ -48,7 +52,9 @@ const SelectForm = ({
           <Select
             disabled={disabled}
             required={required}
-            onValueChange={(value) => field.onChange(value)} // Directly use the value (string or number)
+            onValueChange={(value) =>
+              isStringValue ? field.onChange(value) : field.onChange(Number(value))
+            } // Directly use the value (string or number)
             defaultValue={field.value?.toString()} // Convert to string for display purposes
           >
             <FormControl>

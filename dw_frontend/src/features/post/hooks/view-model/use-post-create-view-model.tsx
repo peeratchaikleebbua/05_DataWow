@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Post, postSchema } from "@/core/models/post/entity/post.entity";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,9 +17,10 @@ export const usePostCreateViewModel = () => {
    */
 
   const method = useForm<Post>({
-    mode: "onChange",
     resolver: zodResolver(postSchema),
   });
+
+  console.log("error", method.formState.errors);
 
   /**
    *  step 4: action

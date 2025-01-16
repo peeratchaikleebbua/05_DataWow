@@ -18,31 +18,28 @@ interface IPostCreateModal {
 }
 
 const PostCreateModal = ({ children }: IPostCreateModal) => {
-  const { method, onSubmit } = usePostCreateViewModel();
   return (
-    <FormProvider {...method}>
-      <form onSubmit={method.handleSubmit(onSubmit)}>
-        <Dialog>
-          <DialogTrigger asChild>{children}</DialogTrigger>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader>
-              <DialogTitle>Create Post</DialogTitle>
-            </DialogHeader>
-            <div className="flex items-center space-x-2">
-              <PostCreateForm />
-            </div>
-            <DialogFooter className="sm:justify-start">
-              <DialogClose asChild>
-                <Button type="button" variant="secondary">
-                  Close
-                </Button>
-              </DialogClose>
-              <Button type="submit">Post</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </form>
-    </FormProvider>
+    <Dialog>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Create Post</DialogTitle>
+        </DialogHeader>
+
+        <div className="flex items-center space-x-2">
+          <PostCreateForm />
+        </div>
+
+        <DialogFooter className="sm:justify-start">
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+          <Button type="submit">Post</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
