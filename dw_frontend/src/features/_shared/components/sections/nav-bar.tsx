@@ -4,7 +4,7 @@ import { Button } from "../elements/button";
 
 const NavBar = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex flex-col h-screen w-screen">
+    <div className="flex flex-col h-full w-full">
       <div className="dark text-foreground flex w-full h-[50px]  flex-shrink-0 bg-green-950 items-center justify-between pl-5 pr-5">
         <BoardText />
         <Button>Sign In</Button>

@@ -1,15 +1,14 @@
 import { Post } from "@/core/models/post/entity/post.entity";
-import { Button } from "@/features/_shared/components/elements/button";
 import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
   CardContent,
   CardFooter,
+  CardDescription,
 } from "@/features/_shared/components/elements/card";
-import { Check } from "lucide-react";
 import React from "react";
+import { FaComment } from "react-icons/fa6";
 import PostBadge from "../../elements/post-badge";
 import UserAvatar from "@/features/_shared/components/elements/user-avatar";
 import { Label } from "@/features/_shared/components/elements/label";
@@ -22,20 +21,23 @@ const PostCard = ({ post }: IPostCard) => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="flex flex-col gap-2">
+        <CardTitle className="flex flex-row gap-2 items-center">
           <UserAvatar />
-          {post.author?.username}
-          <PostBadge postCategory={post.category} />
+          <Label>{post.author?.username}</Label>
         </CardTitle>
-        <CardContent className="flex flex-col gap-2">
-          <Label>{post.title}</Label>
-          <Label>{post.content}</Label>
-        </CardContent>
+        <CardDescription className="flex justify-start">
+          <PostBadge postCategory={post.category} />
+        </CardDescription>
       </CardHeader>
-      <CardFooter>
-        <Button className="flex justify-start">
-          <Label>{"comm"}</Label>
-        </Button>
+      <CardContent className="grid gap-3 text-left">
+        <Label className="text-2xl font-bold text-wrap">{post.title}</Label>
+        <Label className="line-clamp-2 font-normal">{post.content}</Label>
+      </CardContent>
+      <CardFooter className="flex justify-start">
+        <div className="flex flex-row gap-2 items-center">
+          <FaComment className="text-gray-200" />
+          <Label>{post.Comment?.length} Comments</Label>
+        </div>
       </CardFooter>
     </Card>
   );
