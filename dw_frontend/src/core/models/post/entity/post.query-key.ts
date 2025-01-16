@@ -1,3 +1,4 @@
+import { IGetPosts } from "../use-cases/get-posts.use-case";
 import { Post } from "./post.entity";
 
 /**
@@ -5,10 +6,9 @@ import { Post } from "./post.entity";
  * Cache Key Name
  */
 
-
 export const defaultPostQueryKey = "posts";
 
 export const postQueryKeys = {
-  posts: [defaultPostQueryKey] as const,
+  posts: (getPosts?: IGetPosts) => [defaultPostQueryKey, getPosts] as const,
   post: (id: Post["id"]) => [defaultPostQueryKey, id],
 };

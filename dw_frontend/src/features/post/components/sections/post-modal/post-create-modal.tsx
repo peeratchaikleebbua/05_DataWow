@@ -10,14 +10,13 @@ import {
 } from "@/features/_shared/components/elements/dialog";
 import React from "react";
 import PostCreateForm from "../post-aggregated-form/post-create-form";
-import { FormProvider } from "react-hook-form";
-import { usePostCreateViewModel } from "@/features/post/hooks/view-model/use-post-create-view-model";
 
 interface IPostCreateModal {
   children: React.ReactNode;
+  onSubmit?: () => void;
 }
 
-const PostCreateModal = ({ children }: IPostCreateModal) => {
+const PostCreateModal = ({ children, onSubmit }: IPostCreateModal) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -36,7 +35,9 @@ const PostCreateModal = ({ children }: IPostCreateModal) => {
               Close
             </Button>
           </DialogClose>
-          <Button type="submit">Post</Button>
+          <DialogClose>
+            <Button onClick={onSubmit}>Post</Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

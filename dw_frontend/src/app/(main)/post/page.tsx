@@ -18,8 +18,8 @@ export default async function PostsPage() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: postQueryKeys.posts,
-    queryFn: () => getPostsController(sessionId),
+    queryKey: postQueryKeys.posts({ search: "" }),
+    queryFn: () => getPostsController(sessionId, { search: "" }),
   });
 
   return (

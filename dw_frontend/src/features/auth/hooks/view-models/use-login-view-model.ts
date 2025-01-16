@@ -19,29 +19,30 @@ export const useLoginViewModel = () => {
   /**
    *  step 2: react query
    */
-
-  const { mutateAsync, isPending, isError } = useAuthLoginMutation();
-  /**
-   *  step 3: login form
-   */
-
   const method = useForm<LoginUser>({
     mode: "onChange",
     resolver: zodResolver(loginUserSchema),
   });
 
+  const { mutate, isPending, isError } = useAuthLoginMutation();
+  /**
+   *  step 3: login form
+   */
+
+ 
+
   /**
    *  step 4: action
    */
 
-  const onSubmit = async (data: LoginUser) => {
-    await mutateAsync(data);
+  const onSubmit = (data: LoginUser) => {
+   mutate(data);
   };
 
   // prefetch the posts page
   // since we will redirect to posts after login
   useEffect(() => {
-    router.prefetch("/posts", {
+    router.prefetch("/post", {
       kind: PrefetchKind.FULL,
     });
   }, []);

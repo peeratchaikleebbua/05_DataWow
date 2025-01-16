@@ -19,10 +19,13 @@ export class LoggerInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const req = context.switchToHttp().getRequest();
     const { method, url } = req;
+    const username = req?.user?.username;
 
     const now = Date.now();
 
-    this.logger.info(`Incoming Request: ${method} ${url}`);
+    this.logger.info(
+      `Incoming Request: ${method} ${url} ${username ? `by user ${username}` : ''}`,
+    );
 
     return next.handle().pipe(
       tap(
@@ -32,21 +35,21 @@ export class LoggerInterceptor implements NestInterceptor {
           const responseTime = `${Date.now() - now}ms`;
 
           this.logger.info(
-            `Outgoing Response: ${method} ${url} - Status: ${statusCode} - Time: ${responseTime}`,
+            `Outgoing Response: ${method} ${url} - Status: ${statusCode} - Time: ${responseTime} ${username ? `by user ${username}` : ''}`,
           );
         },
         (err) => {
-          const message = err.response?.message
+          const message = err.response?.message;
           const statusCode = err.response?.statusCode;
           const error = err.response?.error;
           const responseTime = `${Date.now() - now}ms`;
           if (message && error) {
             this.logger.error(
-              `Outgoing Response: ${method} ${url} - err: ${error} - message: ${message} - Status: ${statusCode} - Time: ${responseTime}`,
+              `Outgoing Response: ${method} ${url} - err: ${error} - message: ${message} - Status: ${statusCode} - Time: ${responseTime} ${username ? `by user ${username}` : ''}`,
             );
           } else {
             this.logger.error(
-              `Outgoing Response: ${method} ${url} - Status: ${statusCode} - Time: ${responseTime}`,
+              `Outgoing Response: ${method} ${url} - Status: ${statusCode} - Time: ${responseTime} ${username ? `by user ${username}` : ''}`,
             );
           }
         },

@@ -26,7 +26,8 @@ export const usePostCreateViewModel = () => {
    *  step 4: action
    */
 
-  const onSubmit = async (data: Post) => {
+  const onSubmit = async () => {
+    const data = method.getValues()
     console.log("data", data);
   };
 

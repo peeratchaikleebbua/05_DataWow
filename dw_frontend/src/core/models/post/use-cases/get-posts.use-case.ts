@@ -1,9 +1,18 @@
-import {
-  RepositoryResponse,
-} from "@/core/common/repository.common";
+import { RepositoryRequest, RepositoryResponse } from "@/core/common/repository.common";
 import { IPostRepository } from "../entity/post.repository";
-import { Post } from "../entity/post.entity";
-import { AxiosRequestConfig } from "axios";
+import { Post, PostCategory } from "../entity/post.entity";
+import { z } from "zod";
+
+/**
+ * GetPosts Schema
+ */
+
+export const getPostsSchema = z.object({
+  search: z.string().optional(),
+  category: z.nativeEnum(PostCategory).optional(),
+});
+
+export type IGetPosts = z.infer<typeof getPostsSchema>;
 
 /**
  * GetPosts UseCase
@@ -12,7 +21,9 @@ import { AxiosRequestConfig } from "axios";
 export class GetPostsUseCase {
   constructor(private postRepository: IPostRepository) {}
 
-  async execute(config?: AxiosRequestConfig): Promise<RepositoryResponse<Post[]>> {
-    return await this.postRepository.getPosts(config);
+  async execute(
+    request: RepositoryRequest<IGetPosts>
+  ): Promise<RepositoryResponse<Post[]>> {
+    return await this.postRepository.getPosts(request);
   }
 }

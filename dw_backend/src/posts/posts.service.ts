@@ -6,6 +6,8 @@ import {
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { DatabaseService } from 'src/database/database.service';
+import { SearchPostDto } from './dto/search-post.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class PostsService {
@@ -30,15 +32,30 @@ export class PostsService {
     return newPost;
   }
 
-  async findAll() {
+  async findAll(query: SearchPostDto) {
+    const { search, category } = query;
+
+    const where: Prisma.PostWhereInput = {};
+
+    if (search) {
+      where.title = {
+        contains: search,
+      };
+    }
+
+    if (category) {
+      where.category = category;
+    }
+
     return await this.database.post.findMany({
+      where,
       include: {
         author: true,
-        Comment: true
+        Comment: true,
       },
       orderBy: {
-        createdAt: "desc"
-      }
+        createdAt: 'desc',
+      },
     });
   }
 
@@ -48,8 +65,8 @@ export class PostsService {
         id,
       },
       include: {
-        author: true
-      }
+        author: true,
+      },
     });
 
     if (!post) {

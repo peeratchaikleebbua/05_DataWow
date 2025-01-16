@@ -46,8 +46,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             accessToken: user.data.accessToken,
           };
         } catch (error) {
-          console.error("Error during authentication:", error);
-          return null; // Invalid credentials or error in validation
+          const authError = error as Error
+          throw new Error(authError.message)
         }
       },
     }),
@@ -64,8 +64,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      // TODO: Handle Expired Token Here as well
-      // if use token, then apply in jwt callback
       if (token) {
         session.account = token.user;
         session.accessToken = token.accessToken;

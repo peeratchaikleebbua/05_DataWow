@@ -5,13 +5,13 @@ import {
   RepositoryResponse,
 } from "@/core/common/repository.common";
 import { IPostRepository } from "../entity/post.repository";
-import { Post, basePostSchema } from "../entity/post.entity";
+import { Post, postSchema } from "../entity/post.entity";
 
 /**
  * CreatePost Schema
  */
 
-export const createPostSchema = basePostSchema.pick({
+export const createPostSchema = postSchema.pick({
   title: true,
   content: true,
   category: true,

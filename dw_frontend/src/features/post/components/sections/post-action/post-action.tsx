@@ -9,10 +9,10 @@ import { FormProvider } from "react-hook-form";
 import { usePostCreateViewModel } from "@/features/post/hooks/view-model/use-post-create-view-model";
 
 const PostAction = () => {
-  const { method, onSubmit } = usePostCreateViewModel();
+  const { method } = usePostCreateViewModel();
   return (
     <FormProvider {...method}>
-      <form onSubmit={method.handleSubmit(onSubmit)}>
+      <form>
         <div className="grid grid-cols-5 gap-3">
           <Input className="col-span-3" />
           <PostCategorySelectForm />

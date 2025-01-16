@@ -1,7 +1,12 @@
 import { RepositoryResponse } from "@/core/common/repository.common";
 import { UnauthenticatedError } from "@/core/errors/auth";
+import { InputParseError } from "@/core/errors/common";
 import { Post } from "@/core/models/post/entity/post.entity";
-import { GetPostsUseCase } from "@/core/models/post/use-cases/get-posts.use-case";
+import {
+  getPostsSchema,
+  GetPostsUseCase,
+  IGetPosts,
+} from "@/core/models/post/use-cases/get-posts.use-case";
 import { postRepository } from "@/infrastructures/remote-repository/repository/remote-post-repository";
 import { AxiosRequestConfig } from "axios";
 
@@ -16,6 +21,7 @@ import { AxiosRequestConfig } from "axios";
 
 export const getPostsController = async (
   sessionId: number | undefined,
+  getPosts?: IGetPosts,
   config?: AxiosRequestConfig
 ): Promise<RepositoryResponse<Post[]>> => {
   // check authentication
@@ -25,8 +31,19 @@ export const getPostsController = async (
 
   const getPostsUseCase = new GetPostsUseCase(postRepository);
 
-  // invoke usecase
-  const newPost = await getPostsUseCase.execute(config);
+  // check input validation
+  const { data, error: inputParseError } = getPostsSchema.safeParse(getPosts);
+  if (inputParseError) {
+    throw new InputParseError(`Invalid get Posts Input`, {
+      cause: inputParseError,
+    });
+  }
 
-  return newPost;
+  // invoke usecase
+  const posts = await getPostsUseCase.execute({
+    payload: data,
+    config,
+  });
+
+  return posts;
 };

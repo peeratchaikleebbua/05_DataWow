@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -14,6 +15,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserMe } from 'src/common/decorators/user-me.decorator';
 import { AuthUser } from 'src/auths/types/auth.type';
+import { SearchPostDto } from './dto/search-post.dto';
 
 @ApiTags('Post')
 @Controller('posts')
@@ -28,8 +30,8 @@ export class PostsController {
   }
 
   @Get()
-  async findAll() {
-    return this.postsService.findAll();
+  async findAll(@Query() query: SearchPostDto) {
+    return this.postsService.findAll(query);
   }
 
   @Get(':id')
