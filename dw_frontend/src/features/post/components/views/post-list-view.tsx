@@ -5,9 +5,9 @@ import { usePostListViewModel } from "../../hooks/view-model/use-post-list-view-
 import PostListTemplate from "../templates/post-list-template";
 
 const PostListView = () => {
-  const { posts } = usePostListViewModel();
+  const postData = usePostListViewModel();
 
-  return <PostListTemplate posts={posts} />;
+  return <PostListTemplate postData={postData} />;
 };
 
 export default PostListView;

@@ -1,4 +1,7 @@
-import { RepositoryRequest, RepositoryResponse } from "@/core/common/repository.common";
+import {
+  RepositoryRequest,
+  RepositoryResponse,
+} from "@/core/common/repository.common";
 import { IPostRepository } from "../entity/post.repository";
 import { Post, PostCategory } from "../entity/post.entity";
 import { z } from "zod";
@@ -24,6 +27,15 @@ export class GetPostsUseCase {
   async execute(
     request: RepositoryRequest<IGetPosts>
   ): Promise<RepositoryResponse<Post[]>> {
+    let searchInputPayload: string = "";
+    const searchInput = request.payload.search;
+
+    if (searchInput && searchInput.length > 2) {
+      searchInputPayload = searchInput;
+    }
+
+    request.payload.search = searchInputPayload;
+
     return await this.postRepository.getPosts(request);
   }
 }

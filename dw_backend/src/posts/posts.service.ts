@@ -43,7 +43,7 @@ export class PostsService {
       };
     }
 
-    if (category) {
+    if (category !== undefined) {
       where.category = category;
     }
 

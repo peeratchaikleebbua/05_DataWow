@@ -1,16 +1,18 @@
-import { Post } from "@/core/models/post/entity/post.entity";
 import React from "react";
 import PostCard from "../sections/post-card/post-card";
 import PostAction from "../sections/post-action/post-action";
+import { usePostListViewModel } from "../../hooks/view-model/use-post-list-view-model";
 
 interface IPostListTemplate {
-  posts?: Post[];
+  postData: ReturnType<typeof usePostListViewModel>;
 }
 
-const PostListTemplate = ({ posts }: IPostListTemplate) => {
+const PostListTemplate = ({ postData }: IPostListTemplate) => {
+  const posts = postData.posts;
+
   return (
     <div className="w-full flex flex-col gap-3 mt-3">
-      <PostAction />
+      <PostAction search={postData.search} />
       {posts &&
         posts.length > 0 &&
         posts.map((post, index) => (

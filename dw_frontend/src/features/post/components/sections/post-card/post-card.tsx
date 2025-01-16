@@ -15,6 +15,7 @@ import { Label } from "@/features/_shared/components/elements/label";
 
 interface IPostCard {
   post: Post;
+  showActions?: boolean;
 }
 
 const PostCard = ({ post }: IPostCard) => {

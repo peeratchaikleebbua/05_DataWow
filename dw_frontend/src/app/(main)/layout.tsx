@@ -1,3 +1,4 @@
+import { auth, signOut } from "@/auth";
 import NavBar from "@/features/_shared/components/sections/nav-bar";
 import type { Metadata } from "next";
 
@@ -11,10 +12,16 @@ export default async function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // const session = await auth()
+  const session = await auth();
+  const userId = session?.account.id;
+
+  if (!userId) {
+    signOut();
+  }
+
   return (
     <section>
-      <NavBar> {children}</NavBar>
+      <NavBar userId={userId!}> {children}</NavBar>
 
       {/* <NavBar session={session}>{children}</NavBar>
       <FooterSection /> */}
