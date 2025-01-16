@@ -53,36 +53,51 @@ Open [http://localhost:3000](http://localhost:3000) in any browser to see the we
 
     .
     ├── app                                 # App Router for DataWow
-    ├   ├── patient                             # Patient Route
-    ├   ├── staff                               # Staff View Route
+    ├   ├── (auth)                            # Auth Route Group
+    ├   ├── (main)                            # Main Route Group => Post Route
     ├── core                                # Entity and UseCase Layer (Entity & Business Logic)
-    ├   ├── entities                            # Entity and UseCase
-    ├       ├── PatientForm                         # PatientForm Entity
-    ├           ├── entity                              # PatientForm Entity and Repository
-    ├       ├── User                                # User Entity
-    ├           ├── entity                              # User Entity and Repository
+    ├   ├── common                            # common entity and repository
+    ├   ├── errors                            # common error
+    ├   ├── models                            # Entity and UseCase
+    ├       ├── auth                            # auth Entity
+    ├           ├── entity                        # auth Entity and Repository
+    ├           ├── use-cases                     # auth UseCase Business Logic
+    ├       ├── comment                         # comment Entity
+    ├           ├── entity                        # comment Entity and Repository
+    ├           ├── use-cases                     # comment UseCase Business Logic
+    ├       ├── post                            # post Entity
+    ├           ├── entity                        # post Entity and Repository
+    ├           ├── use-cases                     # post UseCase Business Logic
+    ├       ├── user                            # user Entity
+    ├           ├── entity                        # user Entity and Repository
+    ├           ├── use-cases                     # user UseCase Business Logic
     ├── features                            # Feature folder
-    ├   ├── patientForm                         # PatientForm Feature
-    ├       ├── components                          # Reusable Components for PatientForm Feature
-    ├       ├── hooks                               # Reusable Hooks for PatientForm Feature
-    ├           ├── coordinators                        # Reusable Coordinator Hooks for Patient Feature
-    ├           ├── viewModel                           # Reusable ViewModel Hooks for Patient Feature
+    ├   ├── shared                            # shared Feature
+    ├   ├── auth                              # auth Feature
+    ├       ├── components                      # Reusable Components for auth Feature
+    ├       ├── hooks                           # Reusable Hooks for auth Feature
+    ├           ├── coordinators                  # Reusable Coordinator Hooks for auth Feature
+    ├           ├── viewModel                     # Reusable ViewModel Hooks for auth Feature
+    ├   ├── post                              # post Feature
+    ├       ├── components                      # Reusable Components for post Feature
+    ├       ├── hooks                           # Reusable Hooks for post Feature
+    ├           ├── coordinators                  # Reusable Coordinator Hooks for post Feature
+    ├           ├── viewModel                     # Reusable ViewModel Hooks for post Feature
     ├── infrastructures                     # Infrastructure Layer
-    ├   ├── socket-io                           # Socket.IO infrastructure
-    ├       ├── config                          # Config folder for Socket.IO
-    └── shared                              # Global Reusable
-        ├── components                          # Global Reusable component
-        ├── hooks                               # Global Reusable hooks
-
-> Note: This Project is small, so I do not have interface-adaptor layer
-
-> Note: If Project is tended to be larger, I will use Atomic Design Pattern to help organizing Component in Feature
+    ├   ├── remote-repository                 # remote repository in infrastructure layer => handle connect to backend
+    ├       ├── config                          # Config folder for axios
+    ├       ├── repository                      # Remote Repository Implementation using Repository pattern
+    └── interface-adapters                  # Interface-adapters Layer
+        ├── controllers                       # Controller for bridging between use-case and UI in framework&driver layer
+        ├── presenter                         # Presenter for bridging between use-case and UI in framework&driver layer
 
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`NEXT_PUBLIC_API_URL`
+`NEXT_PUBLIC_API_BASE_URL`
+`AUTH_SECRET`
+`AUTH_URL`
 
 ## Authors
 

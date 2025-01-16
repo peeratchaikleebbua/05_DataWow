@@ -22,6 +22,15 @@ This is project for DataWow NestJs Backend
 $ npm install
 ```
 
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DATABASE_URL`
+`JWT_SECRET`
+`PORT`
+`FRONTEND_URL`
+
+
 ## Running the app
 
 ```bash
