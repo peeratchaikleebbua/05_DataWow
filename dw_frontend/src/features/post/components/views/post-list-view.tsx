@@ -1,9 +1,13 @@
-import React from 'react'
+"use client"
+
+import React from "react";
+import { usePostListViewModel } from "../../hooks/view-model/use-post-list-view-model";
+import PostListTemplate from "../templates/post-list-template";
 
 const PostListView = () => {
-  return (
-    <div>PostListView</div>
-  )
-}
+  const { posts } = usePostListViewModel();
 
-export default PostListView
+  return <PostListTemplate posts={posts} />;
+};
+
+export default PostListView;

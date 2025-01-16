@@ -1,5 +1,9 @@
 import { z } from "zod";
 import { dateFormSchema, refIdSchema } from "@/core/common/type.common";
+import { User } from "../../user/entity/user.entity";
+import {
+  Comment,
+} from "../../comment/entity/comment.entity";
 
 /**
  * Post Enum
@@ -44,5 +48,8 @@ export const postSchema = z.object({
   updatedAt: dateFormSchema(),
 });
 
+export type Post = z.infer<typeof postSchema> & {
+  author?: User;
+  Comment?: Comment[];
+};
 
-export type Post = z.infer<typeof postSchema>;

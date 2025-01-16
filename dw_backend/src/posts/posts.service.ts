@@ -32,6 +32,10 @@ export class PostsService {
 
   async findAll() {
     return await this.database.post.findMany({
+      include: {
+        author: true,
+        Comment: true
+      },
       orderBy: {
         createdAt: "desc"
       }
