@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { usePostListViewModel } from "../../hooks/view-model/use-post-list-view-model";

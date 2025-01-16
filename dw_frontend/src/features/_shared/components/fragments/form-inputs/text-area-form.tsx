@@ -1,11 +1,10 @@
 import React from "react";
-import { useController, useFormContext } from "react-hook-form";
+import {  useFormContext } from "react-hook-form";
 import {
   FormField,
   FormItem,
   FormLabel,
   FormControl,
-  FormDescription,
   FormMessage,
 } from "../../elements/form";
 import { Textarea } from "../../elements/textarea";
@@ -26,9 +25,6 @@ const TextAreaForm = ({
   required = false,
 }: ITextAreaForm) => {
   const { control } = useFormContext();
-  const {
-    fieldState: { error },
-  } = useController({ name, control });
 
   return (
     <FormField
@@ -45,8 +41,6 @@ const TextAreaForm = ({
               {...field}
             />
           </FormControl>
-          {error && <FormDescription>{error.message}</FormDescription>}
-
           <FormMessage />
         </FormItem>
       )}

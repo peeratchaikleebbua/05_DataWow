@@ -1,5 +1,4 @@
 import BoardText from "@/features/_shared/components/elements/a-board-text";
-import { Label } from "@radix-ui/react-label";
 import Image from "next/image";
 import React from "react";
 

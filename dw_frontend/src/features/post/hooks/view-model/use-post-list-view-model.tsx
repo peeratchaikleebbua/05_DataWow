@@ -10,10 +10,18 @@ export const usePostListViewModel = () => {
   const { data: posts } = useGetPostsQuery();
 
   /**
+   *  step 3: create post form
+   */
+
+
+  /**
    *  step 4: action
    */
 
+
+
   return {
-    posts: posts?.data
+    posts: posts?.data,
+ 
   };
 };

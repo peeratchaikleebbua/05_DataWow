@@ -1,9 +1,8 @@
 import React from "react";
-import { useController, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { Input } from "../../elements/input";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -26,13 +25,6 @@ const TextForm = ({
   required = false,
 }: ITextForm) => {
   const { control } = useFormContext();
-  const {
-    field,
-    fieldState: { error },
-  } = useController({ name, control });
-
-  console.log('field', field.value)
-  console.log('error', error)
 
   return (
     <FormField
