@@ -14,26 +14,29 @@ interface IPostAction {
 }
 
 const PostAction = ({ search }: IPostAction) => {
-  const { method } = usePostCreateViewModel();
+  const { method, modal, onSubmit } = usePostCreateViewModel();
   return (
     <FormProvider {...method}>
-      <form>
-        <div className="grid grid-cols-5 gap-3">
-          <div className="col-span-3">
-            <PostSearchTitle
-              currentSearch={search.query.searchQuery || ""}
-              onSearch={search.setQuery.handleSearchPosts}
-            />
-          </div>
-          <PostCategorySearch
-            currentSelect={search.query.categoryQuery}
-            onSelect={search.setQuery.handleCategoryChange}
+      <div className="grid grid-cols-5 gap-3">
+        <div className="col-span-3">
+          <PostSearchTitle
+            currentSearch={search.query.searchQuery || ""}
+            onSearch={search.setQuery.handleSearchPosts}
           />
-          <PostCreateModal>
-            <Button>Create +</Button>
-          </PostCreateModal>
         </div>
-      </form>
+        <PostCategorySearch
+          currentSelect={search.query.categoryQuery}
+          onSelect={search.setQuery.handleCategoryChange}
+        />
+
+        <PostCreateModal
+          onSubmit={onSubmit}
+          isOpenModal={modal.isModalOpen}
+          closeModal={modal.closeModal}
+        >
+          <Button onClick={modal.openModal}>Create +</Button>
+        </PostCreateModal>
+      </div>
     </FormProvider>
   );
 };

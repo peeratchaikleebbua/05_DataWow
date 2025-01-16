@@ -34,7 +34,6 @@ const PostDetailTemplate = ({ post, comment }: IPostDetailTemplate) => {
               <Button
                 onClick={comment.modal.openModal}
                 className="border-2 border-green-600"
-                variant={"link"}
               >
                 Add Comments
               </Button>
@@ -45,7 +44,6 @@ const PostDetailTemplate = ({ post, comment }: IPostDetailTemplate) => {
           <div className="hidden md:block">
             <Button
               className="border-2 border-green-600"
-              variant={"link"}
               onClick={comment.toggle.toggleFormVisibility}
             >
               Add Comments

@@ -27,7 +27,7 @@ const CommentCreateModal = ({
       open={isOpenModal}
       onOpenChange={(isOpen) => !isOpen && closeModal()}
     >
-      <DialogTrigger>{children}</DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-sm rounded-lg">
         <DialogHeader>
           <DialogTitle>Add Comments</DialogTitle>
