@@ -6,7 +6,7 @@
     </picture>
   </a>
     <a href="https://nestjs.com/">
-    <img alt="🔗 NestJs" src="https://i.namu.wiki/i/F3KtBKTpJq5qcJ35vTyr2da0Ptuhyar5UX0xNGbFOFBxrsjTTWCRG7qazrxoXgZchYA8OatwwZo_7Ih2xrCI9G_UP4yr7NfIZkNo4QlzYG0qr2_lZIoLjqaeO36N8liVZq80itRqWSEE7JYKLn5mKx7bbKeMVHtV5m2N0M2AtEM.svg"></a>
+    <img alt="🔗 NestJs" src="https://i.namu.wiki/i/F3KtBKTpJq5qcJ35vTyr2da0Ptuhyar5UX0xNGbFOFBxrsjTTWCRG7qazrxoXgZchYA8OatwwZo_7Ih2xrCI9G_UP4yr7NfIZkNo4QlzYG0qr2_lZIoLjqaeO36N8liVZq80itRqWSEE7JYKLn5mKx7bbKeMVHtV5m2N0M2AtEM.svg" height="128"></a>
   <h1>DataWow Backend Project By Peeratchai Kleebbua</h1>
 
 <a href="https://www.linkedin.com/in/peeratchai-kleebbua/"><img alt="🔗 My Profile" src="https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"></a>
