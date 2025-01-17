@@ -3,7 +3,7 @@ import {
   RepositoryResponse,
 } from "@/core/common/repository.common";
 import { IPostRepository } from "../entity/post.repository";
-import { Post, PostCategory } from "../entity/post.entity";
+import { Post, PostCategory, postSchema } from "../entity/post.entity";
 import { z } from "zod";
 
 /**
@@ -13,9 +13,16 @@ import { z } from "zod";
 export const getPostsSchema = z.object({
   search: z.string().optional(),
   category: z.nativeEnum(PostCategory).optional(),
+  userId: z.string().optional(),
 });
 
 export type IGetPosts = z.infer<typeof getPostsSchema>;
+
+export const postListSchema = z.object({
+  posts: z.array(postSchema),
+});
+
+export type PostList = z.infer<typeof postListSchema>
 
 /**
  * GetPosts UseCase

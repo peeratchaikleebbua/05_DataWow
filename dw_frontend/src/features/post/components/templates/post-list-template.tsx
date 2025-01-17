@@ -5,9 +5,10 @@ import { usePostListViewModel } from "../../hooks/view-model/use-post-list-view-
 
 interface IPostListTemplate {
   postData: ReturnType<typeof usePostListViewModel>;
+  showAction?: boolean;
 }
 
-const PostListTemplate = ({ postData }: IPostListTemplate) => {
+const PostListTemplate = ({ postData, showAction }: IPostListTemplate) => {
   const posts = postData.posts;
 
   return (
@@ -18,7 +19,11 @@ const PostListTemplate = ({ postData }: IPostListTemplate) => {
           posts.length > 0 &&
           posts.map((post, index) => (
             <div key={index}>
-              <PostCard post={post} showDate />
+              <PostCard
+                post={post}
+                showDate
+                showActions={showAction}
+              />
             </div>
           ))}
       </div>

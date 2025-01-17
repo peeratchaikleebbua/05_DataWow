@@ -33,7 +33,7 @@ export class PostsService {
   }
 
   async findAll(query: SearchPostDto) {
-    const { search, category } = query;
+    const { search, category, userId } = query;
 
     const where: Prisma.PostWhereInput = {};
 
@@ -45,6 +45,10 @@ export class PostsService {
 
     if (category !== undefined) {
       where.category = category;
+    }
+
+    if (userId) {
+      where.authorId = userId;
     }
 
     return await this.database.post.findMany({
@@ -68,9 +72,9 @@ export class PostsService {
         author: true,
         Comment: {
           include: {
-            author: true
-          }
-        }
+            author: true,
+          },
+        },
       },
     });
 

@@ -3,12 +3,13 @@ import React from "react";
 
 interface IPostContentForm {
   disabled?: boolean;
+  index?: number;
 }
 
-const PostContentForm = ({ disabled }: IPostContentForm) => {
+const PostContentForm = ({ disabled, index }: IPostContentForm) => {
   return (
     <TextAreaForm
-      name="content"
+      name={`${index ? `content.${index}` : "content"}`}
       placeholder="What's on your mind..."
       required
       disabled={disabled}

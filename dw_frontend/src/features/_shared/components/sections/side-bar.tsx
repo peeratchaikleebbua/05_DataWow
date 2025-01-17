@@ -13,18 +13,18 @@ interface ISideBar {
 const SideBar = ({ userId }: ISideBar) => {
   return (
     <div className="flex flex-col justify-start items-start md:mt-5 md:ml-5">
-      <Button variant={"ghost"}>
-        <RiHome3Fill />
-        <Link type="submit" href="/post">
-          <Label>Home</Label>
-        </Link>
-      </Button>
-      <Button variant={"ghost"}>
-        <FaRegEdit />
-        <Link type="submit" href={`/post/${userId}`}>
-          <Label>Our Blog</Label>
-        </Link>
-      </Button>
+      <Link type="submit" href="/post">
+        <Button variant={"ghost"}>
+          <RiHome3Fill />
+          <Label className="cursor-pointer">Home</Label>
+        </Button>
+      </Link>
+      <Link type="submit" href={`/post/user/${userId}`}>
+        <Button variant={"ghost"}>
+          <FaRegEdit />
+          <Label className="cursor-pointer">Our Blog</Label>
+        </Button>
+      </Link>
     </div>
   );
 };

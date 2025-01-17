@@ -4,12 +4,16 @@ import React from "react";
 
 interface IPostCategorySelectForm {
   disabled?: boolean;
+  index?: number;
 }
 
-const PostCategorySelectForm = ({ disabled }: IPostCategorySelectForm) => {
+const PostCategorySelectForm = ({
+  disabled,
+  index,
+}: IPostCategorySelectForm) => {
   return (
     <SelectForm
-      name="category"
+      name={`${index ? `category.${index}` : "category"}`}
       labelName="Category"
       placeholder="Choose a community"
       options={PostBaseFormEntity.postCategoryOptions}

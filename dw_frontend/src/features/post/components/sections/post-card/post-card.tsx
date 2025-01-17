@@ -13,8 +13,13 @@ import PostBadge from "../../elements/post-badge";
 import UserAvatar from "@/features/_shared/components/elements/user-avatar";
 import { Label } from "@/features/_shared/components/elements/label";
 import { useParams, useRouter } from "next/navigation";
-import { dateConversion } from "@/features/_shared/utils/date-conversion";
+import { RiEdit2Line } from "react-icons/ri";
+import { FaRegTrashAlt } from "react-icons/fa";
+
 import DateText from "@/features/_shared/components/fragments/date-text";
+import { IUpdatePost } from "@/core/models/post/use-cases/update-post.use-case";
+import { usePostListViewModel } from "@/features/post/hooks/view-model/use-post-list-view-model";
+import AlertModal from "@/features/_shared/components/fragments/alert-modal";
 
 interface IPostCard {
   post: Post;
@@ -31,10 +36,25 @@ const PostCard = ({ post, showActions, showDate }: IPostCard) => {
   return (
     <Card className="w-full h-full">
       <CardHeader>
-        <CardTitle className="flex flex-row gap-2 items-center">
-          <UserAvatar />
-          <Label>{post.author?.username}</Label>
-          {showDate && <DateText date={post.createdAt} />}
+        <CardTitle className="flex justify-between">
+          <div className="flex flex-row gap-2 items-center">
+            <UserAvatar />
+            <Label>{post.author?.username}</Label>
+            {showDate && <DateText date={post.createdAt} />}
+          </div>
+          {showActions && (
+            <div className="flex flex-wrap gap-3">
+              {/* <RiEdit2Line />
+              <AlertModal
+                title="Please confirm if you wish to delete the post"
+                content="Are you sure you want to delete the post? Once deleted, it cannot be recovered."
+                renderingTrigger={<FaRegTrashAlt className="cursor-pointer" />}
+                isOpenModal={postAction.modal.modalState.openModal}
+                closeModal={postAction.modal.handleCloseModal}
+                renderingAction={<></>}
+              /> */}
+            </div>
+          )}
         </CardTitle>
         <CardDescription className="flex justify-start">
           <PostBadge postCategory={post.category} />

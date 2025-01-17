@@ -3,12 +3,13 @@ import React from "react";
 
 interface IPostTitleForm {
   disabled?: boolean;
+  index?: number;
 }
 
-const PostTitleForm = ({ disabled }: IPostTitleForm) => {
+const PostTitleForm = ({ disabled, index }: IPostTitleForm) => {
   return (
     <TextForm
-      name="title"
+      name={`${index ? `title.${index}` : "title"}`}
       required
       disabled={disabled}
       placeholder="Title"
