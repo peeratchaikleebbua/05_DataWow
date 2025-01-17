@@ -21,7 +21,7 @@ interface ISelectOption {
 
 interface ISelectForm {
   name: string;
-  labelName: string;
+  labelName?: string;
   options: ISelectOption[];
   placeholder?: string;
   required?: boolean;

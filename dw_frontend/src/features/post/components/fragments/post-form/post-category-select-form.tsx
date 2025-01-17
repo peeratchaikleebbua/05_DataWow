@@ -14,7 +14,6 @@ const PostCategorySelectForm = ({
   return (
     <SelectForm
       name={`${index !== undefined ? `posts.${index}.category` : "category"}`}
-      labelName="Category"
       placeholder="Choose a community"
       options={PostBaseFormEntity.postCategoryOptions}
       required
