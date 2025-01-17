@@ -29,6 +29,6 @@ export const dateConversion = ({ date }: IDateConversion) => {
   } else if (minutes > 0) {
     return `${minutes} min. ago`;
   } else {
-    return `${seconds} s. ago`;
+    return `${seconds < 0 ? 0 : seconds} s. ago`;
   }
 };
