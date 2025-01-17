@@ -13,7 +13,6 @@ export const useGetPostsQuery = (getPosts?: IGetPosts) => {
       const { config, sessionId } = await clientSession();
       return getPostsController(sessionId, getPosts, config());
     },
-    placeholderData: keepPreviousData,
     staleTime: 0,
   });
 };

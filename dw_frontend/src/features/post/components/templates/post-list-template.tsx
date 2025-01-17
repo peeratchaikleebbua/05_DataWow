@@ -23,6 +23,7 @@ const PostListTemplate = ({ postData, showAction }: IPostListTemplate) => {
                 post={post}
                 showDate
                 showActions={showAction}
+                index={index}
               />
             </div>
           ))}

@@ -14,9 +14,9 @@ interface IPostAction {
 }
 
 const PostAction = ({ search }: IPostAction) => {
-  const { method, modal, onSubmit } = usePostCreateViewModel();
+  const { modal, onSubmit } = usePostCreateViewModel();
   return (
-    <FormProvider {...method}>
+
       <div className="grid grid-cols-6 md:grid-cols-5 gap-3">
         <div className="col-span-2 md:col-span-3">
           <PostSearchTitle
@@ -40,7 +40,7 @@ const PostAction = ({ search }: IPostAction) => {
           </PostCreateModal>
         </div>
       </div>
-    </FormProvider>
+
   );
 };
 

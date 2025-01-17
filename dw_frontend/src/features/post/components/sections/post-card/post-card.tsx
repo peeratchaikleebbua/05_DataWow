@@ -13,25 +13,30 @@ import PostBadge from "../../elements/post-badge";
 import UserAvatar from "@/features/_shared/components/elements/user-avatar";
 import { Label } from "@/features/_shared/components/elements/label";
 import { useParams, useRouter } from "next/navigation";
-import { RiEdit2Line } from "react-icons/ri";
-import { FaRegTrashAlt } from "react-icons/fa";
-
 import DateText from "@/features/_shared/components/fragments/date-text";
-import { IUpdatePost } from "@/core/models/post/use-cases/update-post.use-case";
-import { usePostListViewModel } from "@/features/post/hooks/view-model/use-post-list-view-model";
+import usePostEditViewModel from "@/features/post/hooks/view-model/use-post-edit-view-model";
 import AlertModal from "@/features/_shared/components/fragments/alert-modal";
+import { FaRegTrashAlt } from "react-icons/fa";
+import PostCreateModal from "../post-modal/post-create-modal";
+import { RiEdit2Line } from "react-icons/ri";
+import { usePostDeleteViewModel } from "@/features/post/hooks/view-model/use-post-delete-view-model";
+import { Button } from "@/features/_shared/components/elements/button";
 
 interface IPostCard {
   post: Post;
   showActions?: boolean;
   showDate?: boolean;
+  index: number;
 }
 
-const PostCard = ({ post, showActions, showDate }: IPostCard) => {
+const PostCard = ({ post, showActions, showDate, index }: IPostCard) => {
   const router = useRouter();
   const params = useParams();
   const postId = params.postId;
   const isDetailPage = postId;
+
+  const { action, modal } = usePostEditViewModel();
+  const { action: deleteAction, modal: deleteModal } = usePostDeleteViewModel();
 
   return (
     <Card className="w-full h-full">
@@ -44,15 +49,38 @@ const PostCard = ({ post, showActions, showDate }: IPostCard) => {
           </div>
           {showActions && (
             <div className="flex flex-wrap gap-3">
-              {/* <RiEdit2Line />
+              <PostCreateModal
+                onSubmit={action.handleEditPost}
+                isOpenModal={modal.modalState.isOpen}
+                mode={modal.modalState.mode}
+                closeModal={modal.handleCloseModal}
+                index={index}
+              >
+                <RiEdit2Line
+                  className="cursor-pointer"
+                  onClick={() => modal.handleOpenModal(index)}
+                />
+              </PostCreateModal>
               <AlertModal
                 title="Please confirm if you wish to delete the post"
                 content="Are you sure you want to delete the post? Once deleted, it cannot be recovered."
-                renderingTrigger={<FaRegTrashAlt className="cursor-pointer" />}
-                isOpenModal={postAction.modal.modalState.openModal}
-                closeModal={postAction.modal.handleCloseModal}
-                renderingAction={<></>}
-              /> */}
+                renderingTrigger={
+                  <FaRegTrashAlt
+                    className="cursor-pointer"
+                    onClick={deleteModal.handleOpenModal}
+                  />
+                }
+                isOpenModal={deleteModal.modalState}
+                closeModal={deleteModal.handleCloseModal}
+                renderingAction={
+                  <Button
+                    variant={"destructive"}
+                    onClick={() => deleteAction.handleDeletePost(post.id)}
+                  >
+                    Delete
+                  </Button>
+                }
+              />
             </div>
           )}
         </CardTitle>

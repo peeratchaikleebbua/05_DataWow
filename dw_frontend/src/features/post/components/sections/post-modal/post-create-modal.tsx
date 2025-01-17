@@ -15,6 +15,8 @@ interface IPostCreateModal {
   closeModal: () => void;
   children: React.ReactNode;
   onSubmit?: () => void;
+  index: number;
+  mode: "create" | "edit";
 }
 
 const PostCreateModal = ({
@@ -22,6 +24,8 @@ const PostCreateModal = ({
   onSubmit,
   isOpenModal,
   closeModal,
+  index,
+  mode,
 }: IPostCreateModal) => {
   return (
     <Dialog
@@ -31,14 +35,18 @@ const PostCreateModal = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="sm:max-w-lg max-w-sm rounded-lg">
         <DialogHeader>
-          <DialogTitle>Create Post</DialogTitle>
+          <DialogTitle>
+            {mode === "create" ? "Create Post" : "Edit Post"}
+          </DialogTitle>
         </DialogHeader>
-        <PostCreateForm />
-        <DialogFooter className="sm:justify-start">
+        <PostCreateForm index={index} />
+        <DialogFooter className="sm:justify-end">
           <Button type="button" variant="secondary" onClick={closeModal}>
             Close
           </Button>
-          <Button onClick={onSubmit}>Post</Button>
+          <Button onClick={onSubmit}>
+            {mode === "create" ? "post" : "confirm"}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

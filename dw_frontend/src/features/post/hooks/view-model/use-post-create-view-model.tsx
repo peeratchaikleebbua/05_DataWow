@@ -3,8 +3,9 @@
 import { Post, postSchema } from "@/core/models/post/entity/post.entity";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm, useFormContext } from "react-hook-form";
 import { useCreatePostMutaiton } from "../../services/post-mutation";
+import { PostList } from "@/core/models/post/use-cases/get-posts.use-case";
 
 export const usePostCreateViewModel = () => {
   /**
@@ -20,10 +21,10 @@ export const usePostCreateViewModel = () => {
     setIsModalOpen(false);
 
     // clear the post
-    method.reset();
+    reset();
 
     // reset error
-    method.clearErrors();
+    clearErrors();
   };
 
   /**
@@ -36,40 +37,48 @@ export const usePostCreateViewModel = () => {
    *  step 3: create post form
    */
 
-  const method = useForm<Post>({
-    resolver: zodResolver(postSchema),
-  });
+  const { control, reset, clearErrors, trigger, getValues } = useFormContext<PostList>();
 
-  console.log("error", method.formState.errors);
+  const {} = useFieldArray({
+    control,
+    name: "posts"
+  })
+
+  // const method = useForm<Post>({
+  //   resolver: zodResolver(postSchema),
+  // });
+
+  // console.log("error", method.formState.errors);
 
   /**
    *  step 4: action
    */
 
   const onSubmit = async () => {
-    const isValidPost = await method.trigger("content", {
-      shouldFocus: true,
-    });
+    const isValidPost = await trigger("content");
+
+    console.log('validPost', isValidPost)
 
     if (!isValidPost) {
       return; // if invalid do nothing
     }
-    const newPost = method.getValues();
+    const newPost = getValues();
 
-    // create post
-    mutateAsync({
-      ...newPost,
-    });
+    console.log('newPost', newPost)
+
+    // // create post
+    // mutateAsync({
+    //   ...newPost,
+    // });
 
     // clear the post
-    method.reset();
+    reset();
 
     // close form
     closeModal();
   };
 
   return {
-    method,
     modal: {
       isModalOpen,
       openModal,

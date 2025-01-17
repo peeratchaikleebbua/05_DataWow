@@ -9,7 +9,7 @@ interface IPostContentForm {
 const PostContentForm = ({ disabled, index }: IPostContentForm) => {
   return (
     <TextAreaForm
-      name={`${index ? `content.${index}` : "content"}`}
+      name={`${index !== undefined ? `posts.${index}.content` : "content"}`}
       placeholder="What's on your mind..."
       required
       disabled={disabled}

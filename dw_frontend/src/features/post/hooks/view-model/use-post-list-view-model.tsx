@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetPostsQuery } from "../../services/post-query";
 import {
   IGetPosts,
@@ -9,11 +9,14 @@ import { User } from "@/core/models/user/entity/user.entity";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Post } from "@/core/models/post/entity/post.entity";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { postQueryKeys } from "@/core/models/post/entity/post.query-key";
 
 export const usePostListViewModel = (userId?: User["id"]) => {
   /**
    * step 1: common state
    */
+
+  console.log('test', postQueryKeys.posts())
 
   const [searchQuery, setSearchQuery] = useState<IGetPosts["search"]>("");
   const [categoryQuery, setCategoryQuery] = useState<
@@ -35,7 +38,7 @@ export const usePostListViewModel = (userId?: User["id"]) => {
    */
 
   const method = useForm<PostList>({
-    values: {
+    defaultValues: {
       posts: posts?.data ?? [],
     },
     resolver: zodResolver(postListSchema),
@@ -44,7 +47,17 @@ export const usePostListViewModel = (userId?: User["id"]) => {
   const { fields } = useFieldArray({
     control: method.control,
     name: "posts",
+    keyName: "key"
   });
+
+  // Reset form data when posts are fetched or search/category query changes
+  useEffect(() => {
+    if (posts?.data) {
+      method.reset({
+        posts: posts.data,
+      });
+    }
+  }, [posts?.data, method.reset]);
 
   /**
    *  step 4: action
@@ -57,6 +70,8 @@ export const usePostListViewModel = (userId?: User["id"]) => {
   const handleCategoryChange = (category: IGetPosts["category"]) => {
     setCategoryQuery(category);
   };
+
+  console.log('fields', fields[0])
 
   return {
     posts: fields,

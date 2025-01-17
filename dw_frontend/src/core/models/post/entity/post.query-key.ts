@@ -10,6 +10,6 @@ import { Post } from "./post.entity";
 export const defaultPostQueryKey = "posts";
 
 export const postQueryKeys = {
-  posts: (getPosts?: IGetPosts) => [defaultPostQueryKey, getPosts] as const,
+  posts: (getPosts?: IGetPosts) => getPosts ? [defaultPostQueryKey, getPosts] : [defaultPostQueryKey] as const,
   post: (id: Post["id"]) => [defaultPostQueryKey, id] as const,
 };

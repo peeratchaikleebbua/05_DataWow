@@ -1,8 +1,8 @@
 import { Post } from "@/core/models/post/entity/post.entity";
-import {
-  useDeletePostMutaiton,
-} from "../../services/post-mutation";
+import { useDeletePostMutaiton } from "../../services/post-mutation";
 import { useState } from "react";
+import { useFormContext } from "react-hook-form";
+import { PostList } from "@/core/models/post/use-cases/get-posts.use-case";
 
 export const usePostDeleteViewModel = () => {
   /**
@@ -24,7 +24,6 @@ export const usePostDeleteViewModel = () => {
    *  step 2: react query
    */
 
-
   const { mutateAsync } = useDeletePostMutaiton();
 
   /**
@@ -33,5 +32,19 @@ export const usePostDeleteViewModel = () => {
 
   const handleDeletePost = async (postId: Post["id"]) => {
     await mutateAsync({ id: postId });
+
+    // close modal
+    handleCloseModal();
+  };
+
+  return {
+    modal: {
+      modalState,
+      handleOpenModal,
+      handleCloseModal,
+    },
+    action: {
+      handleDeletePost,
+    },
   };
 };

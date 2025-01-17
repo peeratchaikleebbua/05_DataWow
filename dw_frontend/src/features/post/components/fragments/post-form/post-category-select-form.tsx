@@ -13,7 +13,7 @@ const PostCategorySelectForm = ({
 }: IPostCategorySelectForm) => {
   return (
     <SelectForm
-      name={`${index ? `category.${index}` : "category"}`}
+      name={`${index !== undefined ? `posts.${index}.category` : "category"}`}
       labelName="Category"
       placeholder="Choose a community"
       options={PostBaseFormEntity.postCategoryOptions}

@@ -5,6 +5,7 @@ import PostContentForm from "../../fragments/post-form/post-content-form";
 
 interface IPostCreateForm {
   disabled?: boolean;
+  index: number
 }
 
 const PostCreateForm = (props: IPostCreateForm) => {

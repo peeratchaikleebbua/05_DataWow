@@ -44,7 +44,7 @@ const AlertModal = ({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={closeModal}>Cancel</AlertDialogCancel>
-          <AlertDialogAction>{renderingAction}</AlertDialogAction>
+          {renderingAction}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

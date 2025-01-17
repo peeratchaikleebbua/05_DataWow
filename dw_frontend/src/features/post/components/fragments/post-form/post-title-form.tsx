@@ -9,7 +9,7 @@ interface IPostTitleForm {
 const PostTitleForm = ({ disabled, index }: IPostTitleForm) => {
   return (
     <TextForm
-      name={`${index ? `title.${index}` : "title"}`}
+      name={`${index !== undefined? `posts.${index}.title` : "title"}`}
       required
       disabled={disabled}
       placeholder="Title"

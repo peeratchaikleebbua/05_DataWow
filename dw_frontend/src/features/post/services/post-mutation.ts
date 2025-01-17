@@ -32,7 +32,7 @@ export const useCreatePostMutaiton = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["posts"],
+        queryKey: postQueryKeys.posts(),
       });
       ToastAlert.success(`สร้าง Post สำเร็จ`);
     },
@@ -59,7 +59,7 @@ export const useUpdatePostMutaiton = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["posts"],
+        queryKey: postQueryKeys.posts(),
       });
       ToastAlert.success(`upate Post สำเร็จ`);
     },
@@ -86,7 +86,7 @@ export const useDeletePostMutaiton = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["posts"],
+        queryKey: postQueryKeys.posts(),
       });
       ToastAlert.success(`delete Post สำเร็จ`);
     },
