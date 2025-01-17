@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Sheet,
   SheetClose,
@@ -7,6 +7,8 @@ import {
 } from "../elements/sheet";
 import SideBar from "./side-bar";
 import { User } from "@/core/models/user/entity/user.entity";
+import { FaArrowRightLong } from "react-icons/fa6";
+
 
 interface IDrawerSidebar {
   children: React.ReactNode;
@@ -14,15 +16,19 @@ interface IDrawerSidebar {
 }
 
 const DrawerSidebar = ({ children, userId }: IDrawerSidebar) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleCloseSheet = () => {
+    setIsOpen(false);
+  };
   return (
-    <Sheet>
+    <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent className="dark bg-green-950 text-foreground">
-        <SheetClose asChild>
-          <div className="grid gap-4 py-4">
-            <SideBar userId={userId} />
-          </div>
-        </SheetClose>
+        <div className="grid gap-4 py-4">
+          <FaArrowRightLong className="ml-5 cursor-pointer text-white" onClick={handleCloseSheet}/>
+          <SideBar userId={userId} onLinkClick={handleCloseSheet} />
+        </div>
       </SheetContent>
     </Sheet>
   );

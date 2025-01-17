@@ -13,20 +13,23 @@ const PostListTemplate = ({ postData, showAction }: IPostListTemplate) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3">
-      <div className="w-full flex flex-col gap-3 mt-3 md:col-span-2">
+      <div className="w-full flex flex-col gap-3 mt-3 md:col-span-2 max-md:p-4">
         <PostAction search={postData.search} />
-        {posts &&
-          posts.length > 0 &&
-          posts.map((post, index) => (
-            <div key={index}>
-              <PostCard
-                post={post}
-                showDate
-                showActions={showAction}
-                index={index}
-              />
-            </div>
-          ))}
+        <div>
+          {posts &&
+            posts.length > 0 &&
+            posts.map((post, index) => (
+              <div key={index}>
+                <PostCard
+                  post={post}
+                  showDate
+                  showActions={showAction}
+                  index={index}
+                  totalPosts={posts.length}
+                />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );

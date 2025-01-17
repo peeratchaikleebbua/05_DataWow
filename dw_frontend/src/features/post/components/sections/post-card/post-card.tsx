@@ -21,15 +21,23 @@ import PostCreateModal from "../post-modal/post-create-modal";
 import { RiEdit2Line } from "react-icons/ri";
 import { usePostDeleteViewModel } from "@/features/post/hooks/view-model/use-post-delete-view-model";
 import { Button } from "@/features/_shared/components/elements/button";
+import { cn } from "@/features/_shared/libs/utils";
 
 interface IPostCard {
   post: Post;
   showActions?: boolean;
   showDate?: boolean;
-  index: number;
+  index?: number;
+  totalPosts?: number;
 }
 
-const PostCard = ({ post, showActions, showDate, index }: IPostCard) => {
+const PostCard = ({
+  post,
+  showActions,
+  showDate,
+  index,
+  totalPosts,
+}: IPostCard) => {
   const router = useRouter();
   const params = useParams();
   const postId = params.postId;
@@ -39,7 +47,14 @@ const PostCard = ({ post, showActions, showDate, index }: IPostCard) => {
   const { action: deleteAction, modal: deleteModal } = usePostDeleteViewModel();
 
   return (
-    <Card className="w-full h-full">
+    <Card
+      className={cn("w-full h-full rounded-none", {
+        "border-none shadow-none p-0": isDetailPage,
+        "rounded-t-2xl": index === 0, // First card
+        "rounded-b-2xl": index === totalPosts! - 1, // Last card
+        "rounded-none": index !== 0 && index !== totalPosts! - 1, // Middle cards
+      })}
+    >
       <CardHeader>
         <CardTitle className="flex justify-between">
           <div className="flex flex-row gap-2 items-center">
@@ -54,11 +69,11 @@ const PostCard = ({ post, showActions, showDate, index }: IPostCard) => {
                 isOpenModal={modal.modalState.isOpen}
                 mode={modal.modalState.mode}
                 closeModal={modal.handleCloseModal}
-                index={index}
+                index={index!}
               >
                 <RiEdit2Line
                   className="cursor-pointer"
-                  onClick={() => modal.handleOpenModal(index)}
+                  onClick={() => modal.handleOpenModal(index!)}
                 />
               </PostCreateModal>
               <AlertModal
@@ -88,14 +103,14 @@ const PostCard = ({ post, showActions, showDate, index }: IPostCard) => {
           <PostBadge postCategory={post.category} />
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-3 text-left">
+      <CardContent className="grid gap-3 text-left ">
         <Label className="text-2xl font-bold text-wrap">{post.title}</Label>
-        <Label className="line-clamp-2 font-normal">{post.content}</Label>
+        <Label className={cn("font-normal", {"line-clamp-2": !isDetailPage})}>{post.content}</Label>
       </CardContent>
       <CardFooter className="flex justify-start">
         <div className="flex flex-row gap-2 items-center">
           <FaComment
-            className={`text-gray-200 ${isDetailPage ? "" : "cursor-pointer"}`}
+            className={cn("text-gray-200", { "cursor-pointer": !isDetailPage })}
             onClick={() => !isDetailPage && router.push(`/post/${post.id}`)}
           />
           <Label className="text-xs font-light text-gray-400">

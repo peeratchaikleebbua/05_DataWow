@@ -9,6 +9,7 @@ import {
 } from "@/features/_shared/components/elements/dialog";
 import React from "react";
 import PostCreateForm from "../post-aggregated-form/post-create-form";
+import OutlinedButton from "@/features/_shared/components/elements/outlined-button";
 
 interface IPostCreateModal {
   isOpenModal: boolean;
@@ -33,19 +34,17 @@ const PostCreateModal = ({
       onOpenChange={(isOpen) => !isOpen && closeModal()}
     >
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-lg max-w-sm rounded-lg">
+      <DialogContent className="sm:max-w-lg max-sm:h-2/3 max-w-sm rounded-lg">
         <DialogHeader>
-          <DialogTitle>
+          <DialogTitle className="text-left font-bold text-2xl">
             {mode === "create" ? "Create Post" : "Edit Post"}
           </DialogTitle>
         </DialogHeader>
         <PostCreateForm index={index} />
-        <DialogFooter className="sm:justify-end">
-          <Button type="button" variant="secondary" onClick={closeModal}>
-            Close
-          </Button>
+        <DialogFooter className="sm:justify-end sm:flex-row sm:gap-2 flex flex-col gap-2">
+          <OutlinedButton onClick={closeModal} label="Close" />
           <Button onClick={onSubmit}>
-            {mode === "create" ? "post" : "confirm"}
+            {mode === "create" ? "Post" : "confirm"}
           </Button>
         </DialogFooter>
       </DialogContent>

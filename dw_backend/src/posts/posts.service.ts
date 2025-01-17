@@ -74,6 +74,9 @@ export class PostsService {
           include: {
             author: true,
           },
+          orderBy: {
+            createdAt: "desc"
+          }
         },
       },
     });
@@ -86,6 +89,8 @@ export class PostsService {
   }
 
   async update(id: number, updatePostDto: UpdatePostDto) {
+    console.log('updateid', id)
+
     const findPost = await this.database.post.findUnique({
       where: { id },
     });
@@ -109,6 +114,7 @@ export class PostsService {
   }
 
   async remove(id: number) {
+    console.log('id', id)
     const removedPost = await this.database.post.findUnique({
       where: { id },
     });

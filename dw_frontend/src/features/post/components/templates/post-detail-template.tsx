@@ -7,6 +7,7 @@ import CommentCreateModal from "../sections/post-modal/comment-create-modal";
 import CommentContentForm from "../fragments/comment-form/comment-content-form";
 import { usePostDetailViewModel } from "../../hooks/view-model/use-post-detail-view-model";
 import ButtonRoute from "@/features/_shared/components/elements/button-route";
+import OutlinedButton from "@/features/_shared/components/elements/outlined-button";
 
 interface IPostDetailTemplate {
   post?: Post;
@@ -17,12 +18,14 @@ const PostDetailTemplate = ({ post, comment }: IPostDetailTemplate) => {
   return (
     <>
       <div className="bg-white h-full">
-        <div className="w-full max-sm:p-5 max-w-screen-md mx-auto pt-4 flex flex-col gap-5">
+        <div className="w-full max-md:p-5 max-w-screen-md mx-auto pt-4 flex flex-col gap-5">
           {/* button to route back to all posts */}
-          <ButtonRoute />
+          <div className="pl-5">
+            <ButtonRoute />
+          </div>
 
           {/* Display post */}
-          {post && <PostCard post={post} />}
+          {post && <PostCard post={post} showDate />}
 
           {/* For screens smaller than md, show modal trigger button */}
           <div className="block md:hidden">
@@ -31,32 +34,36 @@ const PostDetailTemplate = ({ post, comment }: IPostDetailTemplate) => {
               isOpenModal={comment.modal.isModalOpen}
               closeModal={comment.modal.closeModal}
             >
-              <Button
+              <OutlinedButton
                 onClick={comment.modal.openModal}
-                className="border-2 border-green-600"
-              >
-                Add Comments
-              </Button>
+                label="Add Comments"
+                className="ml-5"
+              />
             </CommentCreateModal>
           </div>
 
           {/* For screens md and larger, show the "Add Comments" button and conditionally show the form */}
           <div className="hidden md:block">
-            <Button
-              className="border-2 border-green-600"
-              onClick={comment.toggle.toggleFormVisibility}
-            >
-              Add Comments
-            </Button>
+            {!comment.toggle.isFormVisible && (
+              <OutlinedButton
+                onClick={comment.toggle.toggleFormVisibility}
+                label="Add Comments"
+                className="ml-5"
+              />
+            )}
 
             {/* Conditionally render the form after clicking "Add Comments" */}
             {comment.toggle.isFormVisible && (
               <>
-                <CommentContentForm />
+                <div className="pl-5">
+                  <CommentContentForm />
+                </div>
                 <div className="flex justify-end gap-2 mt-3">
-                  <Button type="button" onClick={comment.toggle.handleCancel}>
-                    Cancel
-                  </Button>
+                  <OutlinedButton
+                    onClick={comment.toggle.handleCancel}
+                    label={"Cancel"}
+                    className="ml-5"
+                  />
                   <Button onClick={comment.handleCreateComment}>Post</Button>
                 </div>
               </>

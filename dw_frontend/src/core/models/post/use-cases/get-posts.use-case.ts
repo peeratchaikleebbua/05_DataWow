@@ -37,7 +37,7 @@ export class GetPostsUseCase {
     let searchInputPayload: string = "";
     const searchInput = request.payload.search;
 
-    if (searchInput && searchInput.length > 2) {
+    if (searchInput && searchInput.length >= 2) {
       searchInputPayload = searchInput;
     }
 

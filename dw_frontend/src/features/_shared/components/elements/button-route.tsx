@@ -2,15 +2,16 @@
 
 import React from "react";
 import { Button } from "./button";
-import { ChevronLeftCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { FaArrowLeft } from "react-icons/fa6";
+
 
 const ButtonRoute = () => {
   const router = useRouter();
 
   return (
-    <Button variant="outline" size="icon" onClick={() => router.back()}>
-      <ChevronLeftCircle />
+    <Button className="rounded-full"  size="icon" onClick={() => router.back()}>
+      <FaArrowLeft />
     </Button>
   );
 };
