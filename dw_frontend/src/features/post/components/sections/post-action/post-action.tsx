@@ -14,33 +14,35 @@ interface IPostAction {
 }
 
 const PostAction = ({ search }: IPostAction) => {
-  const { modal, onSubmit } = usePostCreateViewModel();
+  const { modal, action, index } = usePostCreateViewModel();
   return (
-
-      <div className="grid grid-cols-6 md:grid-cols-5 gap-3">
-        <div className="col-span-2 md:col-span-3">
-          <PostSearchTitle
-            currentSearch={search.query.searchQuery || ""}
-            onSearch={search.setQuery.handleSearchPosts}
-          />
-        </div>
-        <div className="col-span-2 md:col-span-1">
-          <PostCategorySearch
-            currentSelect={search.query.categoryQuery}
-            onSelect={search.setQuery.handleCategoryChange}
-          />
-        </div>
-        <div className="col-span-2 md:col-span-1">
-          <PostCreateModal
-            onSubmit={onSubmit}
-            isOpenModal={modal.isModalOpen}
-            closeModal={modal.closeModal}
-          >
-            <Button className="w-full" onClick={modal.openModal}>Create +</Button>
-          </PostCreateModal>
-        </div>
+    <div className="grid grid-cols-6 md:grid-cols-5 gap-3">
+      <div className="col-span-2 md:col-span-3">
+        <PostSearchTitle
+          currentSearch={search.query.searchQuery || ""}
+          onSearch={search.setQuery.handleSearchPosts}
+        />
       </div>
-
+      <div className="col-span-2 md:col-span-1">
+        <PostCategorySearch
+          currentSelect={search.query.categoryQuery}
+          onSelect={search.setQuery.handleCategoryChange}
+        />
+      </div>
+      <div className="col-span-2 md:col-span-1">
+        <PostCreateModal
+          onSubmit={action.handleCreatePost}
+          isOpenModal={modal.modalState.isOpen}
+          closeModal={modal.handleCloseModal}
+          mode={modal.modalState.mode}
+          index={index}
+        >
+          <Button className="w-full" onClick={modal.handleOpenModal}>
+            Create +
+          </Button>
+        </PostCreateModal>
+      </div>
+    </div>
   );
 };
 

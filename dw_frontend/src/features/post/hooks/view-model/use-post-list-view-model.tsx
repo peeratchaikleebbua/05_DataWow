@@ -7,16 +7,12 @@ import {
 } from "@/core/models/post/use-cases/get-posts.use-case";
 import { User } from "@/core/models/user/entity/user.entity";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Post } from "@/core/models/post/entity/post.entity";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { postQueryKeys } from "@/core/models/post/entity/post.query-key";
 
 export const usePostListViewModel = (userId?: User["id"]) => {
   /**
    * step 1: common state
    */
-
-  console.log('test', postQueryKeys.posts())
 
   const [searchQuery, setSearchQuery] = useState<IGetPosts["search"]>("");
   const [categoryQuery, setCategoryQuery] = useState<
@@ -70,8 +66,6 @@ export const usePostListViewModel = (userId?: User["id"]) => {
   const handleCategoryChange = (category: IGetPosts["category"]) => {
     setCategoryQuery(category);
   };
-
-  console.log('fields', fields[0])
 
   return {
     posts: fields,

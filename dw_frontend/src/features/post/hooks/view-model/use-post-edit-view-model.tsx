@@ -6,7 +6,7 @@ import { PostList } from "@/core/models/post/use-cases/get-posts.use-case";
 
 interface IPostEditModal {
   isOpen: boolean;
-  mode: "create" | "edit";
+  mode: "edit";
   currentIndex: number;
 }
 
