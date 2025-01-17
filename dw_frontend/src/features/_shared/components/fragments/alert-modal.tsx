@@ -1,7 +1,6 @@
 import React from "react";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -10,7 +9,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../elements/alert-dialog";
-import { Button } from "../elements/button";
 
 interface IAlertModal {
   isOpenModal: boolean;

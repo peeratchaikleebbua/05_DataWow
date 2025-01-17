@@ -3,7 +3,6 @@
 import { Button } from "@/features/_shared/components/elements/button";
 import React from "react";
 import PostCreateModal from "../post-modal/post-create-modal";
-import { FormProvider } from "react-hook-form";
 import { usePostCreateViewModel } from "@/features/post/hooks/view-model/use-post-create-view-model";
 import { usePostListViewModel } from "@/features/post/hooks/view-model/use-post-list-view-model";
 import PostSearchTitle from "../../fragments/post-search/post-search-title";

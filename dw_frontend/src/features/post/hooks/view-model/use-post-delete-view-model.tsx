@@ -1,8 +1,6 @@
 import { Post } from "@/core/models/post/entity/post.entity";
 import { useDeletePostMutaiton } from "../../services/post-mutation";
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
-import { PostList } from "@/core/models/post/use-cases/get-posts.use-case";
 
 export const usePostDeleteViewModel = () => {
   /**

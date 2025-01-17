@@ -1,4 +1,3 @@
-import { User } from "../../user/entity/user.entity";
 import { IGetPosts } from "../use-cases/get-posts.use-case";
 import { Post } from "./post.entity";
 

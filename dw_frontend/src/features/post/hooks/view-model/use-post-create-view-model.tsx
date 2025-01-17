@@ -1,9 +1,8 @@
 "use client";
 
-import { Post, postSchema } from "@/core/models/post/entity/post.entity";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Post } from "@/core/models/post/entity/post.entity";
 import { useState } from "react";
-import { useFieldArray, useForm, useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { useCreatePostMutaiton } from "../../services/post-mutation";
 import { PostList } from "@/core/models/post/use-cases/get-posts.use-case";
 
@@ -38,7 +37,6 @@ export const usePostCreateViewModel = () => {
       mode: "create",
       currentIndex: -1,
     });
-    console.log("index", modalState.currentIndex);
 
     // clear the post
     reset({

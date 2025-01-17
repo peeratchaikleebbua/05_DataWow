@@ -40,7 +40,7 @@ export const useLoginViewModel = () => {
   };
 
   // prefetch the posts page
-  // since we will redirect to posts after login
+  // since it will redirect to posts after login
   useEffect(() => {
     router.prefetch("/post", {
       kind: PrefetchKind.FULL,

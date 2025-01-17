@@ -1,8 +1,6 @@
 import { auth } from "@/auth";
 import { postQueryKeys } from "@/core/models/post/entity/post.query-key";
-import UserPostView from "@/features/post/components/views/post-detail-view";
 import UserPostListView from "@/features/post/components/views/user-post-list-view";
-import { getPostByIdController } from "@/interface-adapters/controllers/post/get-post-by-id.controller";
 import { getPostsController } from "@/interface-adapters/controllers/post/get-posts.controller";
 import {
   dehydrate,

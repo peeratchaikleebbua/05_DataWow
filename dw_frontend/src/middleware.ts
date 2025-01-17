@@ -38,7 +38,6 @@ export async function middleware(request: NextRequest) {
     const decodedAccessToken = jwtDecode(accessToken);
 
     if (isTokenExpire(decodedAccessToken.exp)) {
-      console.log("token expire")
       return handleRedirectToLogin(request);
     }
 

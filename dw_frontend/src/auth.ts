@@ -18,8 +18,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       authorize: async (credentials) => {
         try {
-          console.log('credentials',credentials)
-
           // Validate input using Zod
           const { data: parsedCredentials, error: inputParseError } =
             loginUserSchema.safeParse({
@@ -34,8 +32,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const user = await loginUserController({
             username: parsedCredentials.username,
           });
-
-          console.log('user', user)
 
           if (!user) {
             throw new Error("User not found.");

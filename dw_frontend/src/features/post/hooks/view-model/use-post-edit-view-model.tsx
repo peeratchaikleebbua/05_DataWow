@@ -1,4 +1,3 @@
-import { Post } from "@/core/models/post/entity/post.entity";
 import { useState } from "react";
 import { useUpdatePostMutaiton } from "../../services/post-mutation";
 import { useFormContext } from "react-hook-form";
