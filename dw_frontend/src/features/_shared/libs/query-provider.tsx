@@ -66,7 +66,11 @@ export default function QueryProvider({
   const queryClient = getQueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtoolsProduction />
+      {process.env.NODE_ENV === "development" && (
+        <React.Suspense fallback={null}>
+          <ReactQueryDevtoolsProduction />
+        </React.Suspense>
+      )}
       {children}
     </QueryClientProvider>
   );
