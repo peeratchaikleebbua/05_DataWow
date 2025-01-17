@@ -4,7 +4,7 @@ import React from "react";
 
 const AuthCardBoard = () => {
   return (
-    <div className="bg-green-800 w-full h-full rounded-3xl flex flex-col justify-center items-center gap-3">
+    <div className="bg-green-800 w-full h-full rounded-b-3xl md:rounded-3xl flex flex-col justify-center items-center gap-3">
       <div className="relative w-full max-w-xs h-64">
         <Image
           src="/images/datawow_login.png"
