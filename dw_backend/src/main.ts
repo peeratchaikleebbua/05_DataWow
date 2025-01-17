@@ -7,11 +7,13 @@ import { LoggerInterceptor } from './common/interceptors/logger.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  console.log('pro',typeof process.env.FRONTEND_URL)
+
   app.enableCors({
-    origin: [process.env.FRONTEND_URL], // Allow only frontend url
+    origin: process.env.FRONTEND_URL, // Use the actual frontend URL in production
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true, // Allow credentials (e.g., cookies, Authorization header)
     allowedHeaders: 'Authorization, Content-Type',
+    credentials: true, // Ensure credentials are allowed
   });
 
   const config = new DocumentBuilder()
