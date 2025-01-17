@@ -8,8 +8,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: process.env.FRONTEND_URL, // Allow only frontend url
-    credentials: true,
+    origin: [process.env.FRONTEND_URL], // Allow only frontend url
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Allow credentials (e.g., cookies, Authorization header)
+    allowedHeaders: 'Authorization, Content-Type',
   });
 
   const config = new DocumentBuilder()
@@ -23,7 +25,7 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, documentFactory);
 
-  app.useGlobalPipes(new ValidationPipe({transform: true}));
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
   await app.listen(process.env.PORT ?? 3000, () => {
     console.info(`DataWow Server is running on port ${process.env.PORT}`);
   });
